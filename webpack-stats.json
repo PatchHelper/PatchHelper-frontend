@@ -1,0 +1,21 @@
+{
+  "status": "done",
+  "assets": {
+    "main.js": {
+      "name": "main.js",
+      "path": "E:\\Programowanie\\Python\\PatchHelper-backend\\frontend\\dist\\main.js",
+      "publicPath": "/static/main.js"
+    },
+    "node_modules_web-vitals_dist_web-vitals_js.js": {
+      "name": "node_modules_web-vitals_dist_web-vitals_js.js",
+      "path": "E:\\Programowanie\\Python\\PatchHelper-backend\\frontend\\dist\\node_modules_web-vitals_dist_web-vitals_js.js",
+      "publicPath": "/static/node_modules_web-vitals_dist_web-vitals_js.js"
+    }
+  },
+  "chunks": {
+    "main": [
+      "main.js"
+    ]
+  },
+  "publicPath": "/static/"
+}

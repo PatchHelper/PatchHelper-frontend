@@ -5,9 +5,14 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import "tw-elements-react/dist/css/tw-elements-react.min.css";
 
+if(document.getElementById('root') == null) {
+  console.log('Root element not found');
+}
+
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+
 root.render(
   <React.StrictMode>
     <App />

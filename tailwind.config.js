@@ -11,4 +11,3 @@ module.exports = {
     require("tw-elements-react/dist/plugin.cjs")
   ],
 }
-
