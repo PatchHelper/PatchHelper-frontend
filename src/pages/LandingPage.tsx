@@ -1,9 +1,12 @@
 import React from "react";
 
+import { Navbar } from "../components";
+import { ImageSpacer1, ImageSpacer2 } from "../img";
+
 const LandingPage: React.FC = () => {
   return (
     <div>
-      <h1>Landing Page</h1>
+      <Navbar />
     </div>
   );
 };

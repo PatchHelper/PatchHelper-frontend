@@ -2,6 +2,39 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  /* :root {
+    --color-primary: #e2ad28;
+    --color-secondary: #6BA4EB;
+    --color-accent: #93d507;
+    --color-background: #EDEDED;
+    --color-background2: #b3b3b3;
+    --color-text: #080807;
+    --color-text-secondary: #F8F8F7;
+  }
+
+  :root[class~="dark"] {
+    --color-primary: #D7A31d;
+    --color-secondary: #144E94;
+    --color-accent: #b7f82a;
+    --color-background: #212121;
+    --color-background2: #121212;
+    --color-text: #F8F8F7;
+    --color-text-secondary: #080807;
+  } */
+
+  /* TODO: make the website usable in light and darkmode*/
+  :root {
+    --color-primary: #D7A31d;
+    --color-secondary: #144E94;
+    --color-accent: #b7f82a;
+    --color-background: #212121;
+    --color-background2: #121212;
+    --color-text: #F8F8F7;
+    --color-text-secondary: #080807;
+  }
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -16,30 +49,41 @@ code {
     monospace;
 }
 
-.btn {
-  @apply px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal transition duration-150 ease-in-out text-white focus:outline-none focus:ring-0
+.boldheader1{
+  @apply text-7xl font-bold font-poppins;
+}
+.boldheader2{
+  @apply text-6xl font-bold font-poppins;
+}
+.boldheader3{
+  @apply text-5xl font-bold font-poppins;
+}
+.boldheader4{
+  @apply text-4xl font-bold font-poppins;
 }
 
-.btn-primary{
-  @apply bg-primary shadow-[0_4px_9px_-4px_#3b71ca] hover:bg-primary-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-primary-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] active:bg-primary-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)];
+.semiboldheader1{
+  @apply text-5xl font-semibold font-inter;
+}
+.semiboldheader2{
+  @apply text-3xl font-semibold font-inter;
+}
+.semiboldheader3{
+  @apply text-2xl font-semibold font-inter;
+}
+.semiboldheader4{
+  @apply text-lg font-semibold font-inter;
 }
 
-.btn-secondary{
-  @apply text-primary-700 hover:bg-primary-accent-100 focus:bg-primary-accent-100 focus:outline-none focus:ring-0 active:bg-primary-accent-200;
+.basetext{
+  @apply text-base font-inter;
 }
-
-.btn-success {
-  @apply bg-success shadow-[0_4px_9px_-4px_#14a44d] hover:bg-success-600 hover:shadow-[0_8px_9px_-4px_rgba(20,164,77,0.3),0_4px_18px_0_rgba(20,164,77,0.2)] focus:bg-success-600 focus:shadow-[0_8px_9px_-4px_rgba(20,164,77,0.3),0_4px_18px_0_rgba(20,164,77,0.2)] active:bg-success-700 active:shadow-[0_8px_9px_-4px_rgba(20,164,77,0.3),0_4px_18px_0_rgba(20,164,77,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(20,164,77,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(20,164,77,0.2),0_4px_18px_0_rgba(20,164,77,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(20,164,77,0.2),0_4px_18px_0_rgba(20,164,77,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(20,164,77,0.2),0_4px_18px_0_rgba(20,164,77,0.1)];
+.boldbasetext{
+  @apply text-base font-bold font-inter;
 }
-
-.btn-danger{
-  @apply bg-danger text-white shadow-[0_4px_9px_-4px_#dc4c64] hover:bg-danger-600 hover:shadow-[0_8px_9px_-4px_rgba(220,76,100,0.3),0_4px_18px_0_rgba(220,76,100,0.2)] focus:bg-danger-600 focus:shadow-[0_8px_9px_-4px_rgba(220,76,100,0.3),0_4px_18px_0_rgba(220,76,100,0.2)] focus:outline-none focus:ring-0 active:bg-danger-700 active:shadow-[0_8px_9px_-4px_rgba(220,76,100,0.3),0_4px_18px_0_rgba(220,76,100,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(220,76,100,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(220,76,100,0.2),0_4px_18px_0_rgba(220,76,100,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(220,76,100,0.2),0_4px_18px_0_rgba(220,76,100,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(220,76,100,0.2),0_4px_18px_0_rgba(220,76,100,0.1)];
+.navbarlinks{
+  @apply text-lg font-inter;
 }
-
-.btn-info{
-  @apply bg-info text-white shadow-[0_4px_9px_-4px_#54b4d3] hover:bg-info-600 hover:shadow-[0_8px_9px_-4px_rgba(84,180,211,0.3),0_4px_18px_0_rgba(84,180,211,0.2)] focus:bg-info-600 focus:shadow-[0_8px_9px_-4px_rgba(84,180,211,0.3),0_4px_18px_0_rgba(84,180,211,0.2)] focus:outline-none focus:ring-0 active:bg-info-700 active:shadow-[0_8px_9px_-4px_rgba(84,180,211,0.3),0_4px_18px_0_rgba(84,180,211,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(84,180,211,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(84,180,211,0.2),0_4px_18px_0_rgba(84,180,211,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(84,180,211,0.2),0_4px_18px_0_rgba(84,180,211,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(84,180,211,0.2),0_4px_18px_0_rgba(84,180,211,0.1)];
-}
-
-.patch-title {
-  cursor: pointer;
+.footertext{
+  @apply text-xs font-inter;
 }

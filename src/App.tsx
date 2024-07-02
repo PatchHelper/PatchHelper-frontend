@@ -8,7 +8,7 @@ const App: React.FC = () => {
         <Router>
             <Routes>
                 <Route path="/" Component={LandingPage}/>
-                <Route path="/posts" Component={MainApp}/>
+                <Route path="/patches" Component={MainApp}/>
             </Routes>
         </Router>
     );
