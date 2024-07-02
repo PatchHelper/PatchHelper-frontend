@@ -1,6 +1,5 @@
 @tailwind base;
 @tailwind components;
-@tailwind utilities;
 
 @layer base {
   /* :root {
@@ -48,6 +47,8 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+@tailwind utilities;
 
 .boldheader1{
   @apply text-7xl font-bold font-poppins;

@@ -1,12 +1,13 @@
 import React from "react";
 
-import { Navbar } from "../components";
+import { Navbar, HeroBanner } from "../components";
 import { ImageSpacer1, ImageSpacer2 } from "../img";
 
 const LandingPage: React.FC = () => {
   return (
-    <div>
+    <div className="flex flex-col w-full overflow-hidden">
       <Navbar />
+      <HeroBanner />
     </div>
   );
 };
