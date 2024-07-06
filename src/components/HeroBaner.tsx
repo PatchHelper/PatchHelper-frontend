@@ -10,7 +10,7 @@ const HeroBanner: React.FC = () => {
                 Upgrade Your Game, <br/> Your Way
             </h1>
         </div>
-        <div className="flex md:w-[32%]">
+        <div className="flex md:w-[32%] md:max-w-[432px] md:max-h-[464px]">
             <img 
               src={ HeroCard } 
               alt="HeroCard"
