@@ -3,21 +3,26 @@ import React from "react";
 import { 
   Navbar, 
   HeroBanner, 
-  Spacer,
   StatBar,
+  About,
+  Instructions,
+  Footer,
 } from "../components";
 
 const LandingPage: React.FC = () => {
   return (
-    <div className="flex flex-col w-full overflow-hidden">
+    <div className="flex flex-col w-full overflow-x-hidden">
       <Navbar />
-      <main className="w-full">
+      <main className="w-full flex flex-col gap-y-12">
         <HeroBanner />
 
-        <Spacer variant={0} />
         <StatBar />
-        <Spacer variant={1} />
 
+        <About />
+
+        <Instructions />
+
+        <Footer />
       </main>
     </div>
   );
