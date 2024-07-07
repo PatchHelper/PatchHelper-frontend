@@ -1,7 +1,7 @@
 import React from "react";
 import axios from "axios";
 
-import { LandingPageStat } from "../types/LandingPageStat";
+import { LandingPageStat } from "../types";
 
 interface StatLabelProps {
     variant?: "fill" | "hollow";

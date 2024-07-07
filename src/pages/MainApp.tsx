@@ -1,12 +1,15 @@
 import React from "react";
 
-import PostList from '../components/PostList';
+import { Navbar, PatchList, Footer } from "../components";
 
 const MainApp: React.FC = () => {
   return (
-    <div>
-      <h1>Main App</h1>
-      <PostList />
+    <div className="flex flex-col w-full overflow-x-hidden">
+      <Navbar/>
+
+      <PatchList />
+
+      <Footer />
     </div>
   );
 };

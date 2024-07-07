@@ -3,6 +3,7 @@ import ImageSpacer2 from "../img/ImageSpacer2.svg";
 import ArrowDown from "../img/ArrowDown.svg";
 import Menu from "../img/menu.svg";
 import CloseMenu from "../img/close.svg";
+import SearchIcon from "../img/search.svg";
 import HeroCard from "../img/HeroCard.svg";
 
 import AboutImage from "../img/tu bedzie fajne zdjecie czy cos.png"
@@ -14,6 +15,7 @@ export {
     ArrowDown,
     Menu,
     CloseMenu,
+    SearchIcon,
     HeroCard,
     AboutImage,
     InstructionImage

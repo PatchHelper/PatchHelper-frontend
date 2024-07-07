@@ -1,10 +1,12 @@
-import React, { useState }from 'react';
+import React, {useState} from "react";
 
-import { navLinks } from '../constants';
-import { Menu, CloseMenu } from '../img';
+import { Menu, CloseMenu, SearchIcon } from "../img";
+import { navMainAppLinks } from "../constants";
 
 const Navbar: React.FC = () => {
     const [toggle, setToggle] = useState(false);
+    const userState = "logged_in";
+
     return (
         <nav className='flex justify-between items-middle bg-background2 px-8 md:px-[11.25%] pt-12 pb-8 md:py-4'>
             <div className='flex max-h-[44px] gap-x-2'>
@@ -12,19 +14,32 @@ const Navbar: React.FC = () => {
                 <p className='semiboldheader3 justify-items-center self-center text-text'>Patch<span className='text-clr_primary'>Helper</span></p>
             </div>
 
-            <ul className='hidden sm:flex items-start gap-x-20 justify-center self-center text-text'>
-                {navLinks.map((link) => (
-                    <li 
-                      key={link.id}
-                      className='cursor-pointer semiboldheader4 transition duration-250 hover:opacity-75'>
-                        <a href={`${link.id==='patches'? "" : "#"}${link.id}`}>
-                            {link.label}
-                        </a>
-                    </li>
-                ))}
-            </ul>
+            <div className="hidden lg:flex flex-row items-start align-middle gap-x-24">
+                <ul className='flex items-start gap-x-6 justify-center self-center text-text'>
+                    {navMainAppLinks.main_links.map((link) => (
+                        <li 
+                        key={link.id}
+                        className='cursor-pointer semiboldheader4 transition duration-250 hover:opacity-75'>
+                            <a href={`${link.id}`}>
+                                {link.label==="Search"? <img src={SearchIcon} alt="SearchIcon"/> : link.label}
+                            </a>
+                        </li>
+                    ))}
+                </ul>
+                <ul className='flex items-start gap-x-6 justify-center self-center text-text'>
+                    {navMainAppLinks.user_links[userState].map((link) => (
+                        <li 
+                        key={link.id}
+                        className='cursor-pointer semiboldheader4 transition duration-250 hover:opacity-75'>
+                            <a href={`${link.id}`}>
+                                {link.label}
+                            </a>
+                        </li>
+                    ))}
+                </ul>
+            </div>
 
-            <div className='flex sm:hidden bottom-8 top-12 justify-end items-center align-middle'>
+            <div className='flex lg:hidden bottom-8 top-12 justify-end items-center align-middle'>
                 <img
                   src={toggle ? CloseMenu : Menu}
                   alt='MenuIcon'
@@ -32,9 +47,20 @@ const Navbar: React.FC = () => {
                   onClick={() => setToggle((prev) => !prev)}
                 />
 
-                <div className={`${toggle ? 'flex': 'hidden'} p-4 absolute top-20 right-0 mx-4 my-4 min-w-[140px] sidebar bg-clr_secondary rounded-xl`}>
-                    <ul className='list-none flex flex-col flex-1 gap-y-2 justify-end items-start'>
-                        {navLinks.map((link) => (
+                <div className={`${toggle ? 'flex': 'hidden'} flex-col p-4 absolute top-20 right-0 mx-4 my-4 gap-y-4 min-w-[140px] sidebar bg-clr_secondary rounded-xl`}>
+                    <ul className='list-none flex flex-col flex-1 justify-end items-start'>
+                        {navMainAppLinks.main_links.map((link) => (
+                            <li 
+                              key={link.id}
+                              className='cursor-pointer semiboldheader4 transition duration-250 hover:opacity-75'>
+                                <a href={`#${link.id}`} className='text-text'>
+                                    {link.label}
+                                </a>
+                            </li>
+                        ))}
+                    </ul>
+                    <ul className='list-none flex flex-col flex-1 justify-end items-start'>
+                        {navMainAppLinks.user_links[userState].map((link) => (
                             <li 
                               key={link.id}
                               className='cursor-pointer semiboldheader4 transition duration-250 hover:opacity-75'>

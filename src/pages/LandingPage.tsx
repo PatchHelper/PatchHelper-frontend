@@ -1,7 +1,7 @@
 import React from "react";
 
 import { 
-  Navbar, 
+  SimpleNavbar, 
   HeroBanner, 
   StatBar,
   About,
@@ -12,7 +12,7 @@ import {
 const LandingPage: React.FC = () => {
   return (
     <div className="flex flex-col w-full overflow-x-hidden">
-      <Navbar />
+      <SimpleNavbar/>
       <main className="w-full flex flex-col gap-y-12">
         <HeroBanner />
 

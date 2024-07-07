@@ -1,4 +1,4 @@
-export const navLinks = [
+export const navLandingPageLinks = [
     {
         id: 'about',
         label: 'About',
@@ -12,6 +12,54 @@ export const navLinks = [
         label: 'Sign up'
     }
 ]
+
+export const navMainAppLinks = {
+    main_links: [
+    {
+        id: 'patches',
+        label: 'Dashboard',
+    },
+    {
+        id: 'latest',
+        label: 'Patches'
+    },
+    {
+        id: '#about',
+        label: 'About'
+    },
+    {
+        id: "faq",
+        label: "FAQ"
+    }
+    ],
+    user_links: {
+        "logged_in": [
+            {
+                id: 'profile',
+                label: 'Profile',
+            },
+            {
+                id: 'logout',
+                label: 'Logout'
+            },
+            {
+                id: 'search',
+                label: 'Search'
+            }
+        ],
+        "logged_out": [
+            {
+                id: 'login',
+                label: 'Login',
+            },
+            {
+                id: 'register',
+                label: 'Register'
+            }
+        ]
+    }
+    
+};
 
 export const AboutCardData = [
     {

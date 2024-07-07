@@ -1,3 +1,4 @@
+import SimpleNavbar from "./SimpleNavbar";
 import Navbar from "./Navbar";
 import HeroBanner from "./HeroBaner";
 import Spacer from "./Spacer";
@@ -7,8 +8,11 @@ import InfoCard from "./InfoCard";
 import Instructions from "./Instructions";
 import Footer from "./Footer";
 
+import PatchList from "./PatchList";
+
 export { 
-    Navbar, 
+    SimpleNavbar, 
+    Navbar,
     HeroBanner, 
     Spacer, 
     StatBar,
@@ -16,4 +20,5 @@ export {
     InfoCard,
     Instructions,
     Footer,
+    PatchList
 };

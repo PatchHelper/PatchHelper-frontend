@@ -1,6 +1,6 @@
 import React from "react";
 import axios from 'axios';
-import { Post } from '../types/Post';
+import { Post } from '../types';
 
 const PostList: React.FC = () => {
     const [posts, setPosts] = React.useState<Post[]>([]);
