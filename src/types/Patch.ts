@@ -7,4 +7,5 @@ export default interface Patch {
     content: Node[];
     created: string;
     updated: string;
+    creator_username: string;
 };

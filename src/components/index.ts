@@ -9,6 +9,8 @@ import Instructions from "./Instructions";
 import Footer from "./Footer";
 
 import PatchList from "./PatchList";
+import PatchOverview from "./PatchOverwiev";
+import AsideBox from "./AsideBox";
 
 export { 
     SimpleNavbar, 
@@ -20,5 +22,7 @@ export {
     InfoCard,
     Instructions,
     Footer,
-    PatchList
+    PatchList,
+    PatchOverview,
+    AsideBox
 };

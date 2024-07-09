@@ -19,7 +19,7 @@ const PatchEditor: React.FC = () => {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        const newPatch: Omit<Patch, 'id' | 'created' | 'updated'> = { title, description, content };
+        const newPatch: Omit<Patch, 'id' | 'created' | 'updated'> = { title, description, content, creator_username: 'Anonymous'};
         await api.post('/patches/', newPatch);
     };
 
