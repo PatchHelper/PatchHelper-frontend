@@ -8,7 +8,6 @@ import InfoCard from "./InfoCard";
 import Instructions from "./Instructions";
 import Footer from "./Footer";
 
-import PatchList from "./PatchList";
 import PatchOverview from "./PatchOverwiev";
 import AsideBox from "./AsideBox";
 
@@ -22,7 +21,6 @@ export {
     InfoCard,
     Instructions,
     Footer,
-    PatchList,
     PatchOverview,
     AsideBox
 };

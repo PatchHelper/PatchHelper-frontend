@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { format } from 'date-fns';
 
 import { PersonFill, Callendar } from "../img";
@@ -16,7 +17,7 @@ const PatchOverview: React.FC<PatchOverviewProps> = ({title, description, creato
             {/* Add the post thumbnail here */}
             <div className="flex flex-col gap-y-3">
                 <div className="flex flex-col align-middle"> 
-                    <h3 className="semiboldheader2 text-text">{title}</h3>
+                    <Link to={`/patches/${title}`}className="semiboldheader2 text-text">{title}</Link>
                     <div className="flex flex-row gap-x-4 text-clr_primary">
                         <div className="flex flex-row gap-x-2 items-center justify-center">
                             <img src={PersonFill} alt="Person icon" className="w-4 h-4"/>

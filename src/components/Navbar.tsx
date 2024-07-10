@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import { Link } from "react-router-dom";
 
 import { Menu, CloseMenu, SearchIcon } from "../img";
 import { navMainAppLinks } from "../constants";
@@ -11,7 +12,7 @@ const Navbar: React.FC = () => {
         <nav className='flex justify-between items-middle bg-background2 px-8 md:px-[11.25%] pt-12 pb-8 md:py-4'>
             <div className='flex max-h-[44px] gap-x-2'>
                 {/* TODO: Insert logotype here later */}
-                <p className='semiboldheader3 justify-items-center self-center text-text'>Patch<span className='text-clr_primary'>Helper</span></p>
+                <Link to="/"className='semiboldheader3 justify-items-center self-center text-text'>Patch<span className='text-clr_primary'>Helper</span></Link>
             </div>
 
             <div className="hidden lg:flex flex-row items-start align-middle gap-x-24">
@@ -20,9 +21,9 @@ const Navbar: React.FC = () => {
                         <li 
                         key={link.id}
                         className='cursor-pointer semiboldheader4 transition duration-250 hover:opacity-75'>
-                            <a href={`${link.id}`}>
+                            <Link to={`/${link.id}`}>
                                 {link.label==="Search"? <img src={SearchIcon} alt="SearchIcon"/> : link.label}
-                            </a>
+                            </Link>
                         </li>
                     ))}
                 </ul>
@@ -31,9 +32,9 @@ const Navbar: React.FC = () => {
                         <li 
                         key={link.id}
                         className='cursor-pointer semiboldheader4 transition duration-250 hover:opacity-75'>
-                            <a href={`${link.id}`}>
+                            <Link to={`/${link.id}`}>
                                 {link.label}
-                            </a>
+                            </Link>
                         </li>
                     ))}
                 </ul>
@@ -53,9 +54,9 @@ const Navbar: React.FC = () => {
                             <li 
                               key={link.id}
                               className='cursor-pointer semiboldheader4 transition duration-250 hover:opacity-75'>
-                                <a href={`#${link.id}`} className='text-text'>
+                                <Link to={`/${link.id}`} className='text-text'>
                                     {link.label}
-                                </a>
+                                </Link>
                             </li>
                         ))}
                     </ul>
@@ -64,9 +65,9 @@ const Navbar: React.FC = () => {
                             <li 
                               key={link.id}
                               className='cursor-pointer semiboldheader4 transition duration-250 hover:opacity-75'>
-                                <a href={`#${link.id}`} className='text-text'>
+                                <Link to={`/${link.id}`} className='text-text'>
                                     {link.label}
-                                </a>
+                                </Link>
                             </li>
                         ))}
                     </ul>
