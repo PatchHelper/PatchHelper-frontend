@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { format } from 'date-fns';
 
-import api from "../api";
+import api from "../utils/api";
 import { Patch } from "../types";
 import { PersonFill, Callendar } from "../img";
 

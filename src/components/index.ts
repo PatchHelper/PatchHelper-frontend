@@ -8,6 +8,8 @@ import InfoCard from "./InfoCard";
 import Instructions from "./Instructions";
 import Footer from "./Footer";
 
+import Button from "./Button";
+
 import PatchOverview from "./PatchOverwiev";
 import AsideBox from "./AsideBox";
 
@@ -22,5 +24,6 @@ export {
     Instructions,
     Footer,
     PatchOverview,
-    AsideBox
+    AsideBox,
+    Button
 };

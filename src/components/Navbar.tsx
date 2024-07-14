@@ -3,10 +3,11 @@ import { Link } from "react-router-dom";
 
 import { Menu, CloseMenu, SearchIcon } from "../img";
 import { navMainAppLinks } from "../constants";
+import { isLoggedIn } from "../utils/auth";
 
 const Navbar: React.FC = () => {
     const [toggle, setToggle] = useState(false);
-    const userState = "logged_in";
+    const userState = isLoggedIn()? "logged_in" : "logged_out";
 
     return (
         <nav className='flex justify-between items-middle bg-background2 px-8 md:px-[11.25%] pt-12 pb-8 md:py-4'>

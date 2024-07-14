@@ -1,6 +1,6 @@
 // src/components/FileUpload.tsx
 import React, { useState } from 'react';
-import api from '../api';
+import api from '../utils/api';
 
 interface FileUploadProps {
     onUpload: (url: string, type: 'image' | 'video') => void;

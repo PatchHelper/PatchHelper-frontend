@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import { Patch } from "../types";
-import api from "../api";
+import api from "../utils/api";
 import { PatchOverview, AsideBox } from "../components";
 
 const MainApp: React.FC = () => {
