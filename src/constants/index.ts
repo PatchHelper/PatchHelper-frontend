@@ -35,7 +35,7 @@ export const navMainAppLinks = {
     user_links: {
         "logged_in": [
             {
-                id: 'profile',
+                id: 'profile/me',
                 label: 'Profile',
             },
             {

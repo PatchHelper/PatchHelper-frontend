@@ -6,7 +6,7 @@ import { FooterLinks } from "../constants";
 const Footer: React.FC = () => {
 
     return (
-        <footer className="w-full">
+        <footer className="w-full mt-auto">
             <Spacer variant={0}/> 
             <div className="flex flex-col gap-x-12 gap-y-6 md:flex-row justify-center pb-16 pt-8 px-8 md:px-[11.25%] bg-background2">
                 <div className="flex flex-col gap-y-1">
