@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-
+import { format } from 'date-fns';
 import { useParams } from 'react-router-dom';
+
 import { getProfile, updateProfile } from "../services/profileService";
 import { Button } from "../components";
 import { Callendar } from "../img";
@@ -65,7 +66,7 @@ const ProfileEdit: React.FC = () => {
                             {avatarPreview && <img src={avatarPreview} alt="User avatar" className="w-32 h-32"/>}
                             <div className="flex flex-row gap-x-2">
                                 <img src={Callendar} alt="Callendar icon" />
-                                <p className="text-base text-text opacity-70">{new Date(profile.joined).toLocaleDateString()}</p>
+                                <p className="text-base text-text opacity-70">{format(new Date(profile.joined).toLocaleDateString(), 'dd-MM-yyyy')}</p>
                             </div>
                             <input type="file" accept="image/*" id="avatar" onChange={handleAvatarChange} />
                         </div>

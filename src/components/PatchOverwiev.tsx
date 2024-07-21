@@ -7,7 +7,10 @@ import { PersonFill, Callendar } from "../img";
 interface PatchOverviewProps {
     title: string;
     description: string;
-    creator: string;
+    creator: {
+        id: number;
+        username: string;
+    };
     created_at: string;
 }
 
@@ -21,7 +24,7 @@ const PatchOverview: React.FC<PatchOverviewProps> = ({title, description, creato
                     <div className="flex flex-row gap-x-4 text-clr_primary">
                         <div className="flex flex-row gap-x-2 items-center justify-center">
                             <img src={PersonFill} alt="Person icon" className="w-4 h-4"/>
-                            <p>{creator}</p>
+                            <Link to={`/profile/${creator.id}`}><p>{creator.username}</p></Link>
                         </div>
                         <div className="flex flex-row gap-x-2 items-center justify-center">
                             <img src={Callendar} alt="Callendar icon" className="w-4 h-4"/>

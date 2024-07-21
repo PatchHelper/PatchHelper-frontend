@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-
 import { useParams } from 'react-router-dom';
+import { format } from 'date-fns';
+
 import { getProfile } from "../services/profileService";
 import { Callendar } from "../img";
 
@@ -39,7 +40,7 @@ const ProfileView: React.FC = () => {
                             {avatarPreview && <img src={avatarPreview} alt="User avatar" className="w-32 h-32"/>}
                             <div className="flex flex-row gap-x-2">
                                 <img src={Callendar} alt="Callendar icon" />
-                                <p className="text-base text-text opacity-70">{new Date(profile.joined).toLocaleDateString()}</p>
+                                <p className="text-base text-text opacity-70">{format(new Date(profile.joined).toLocaleDateString(), 'dd-MM-yyyy')}</p>
                             </div>
                         </div>
 

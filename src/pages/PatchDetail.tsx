@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { format } from 'date-fns';
 
-import api from "../utils/api";
+import { fetchPatch } from "../services/patchService";
 import { Patch } from "../types";
 import { PersonFill, Callendar } from "../img";
 
@@ -11,18 +11,22 @@ const PatchDetail: React.FC = () => {
     const [patch, setPatch] = useState<Patch | null>(null);
 
     useEffect(() => {
-        const fetchPatch = async () => {
-            const response = await api.get(`/patches/${title}`);
-            
+        if (!title) {
+            console.error("No title provided in URL");
+            return;
+        }
+        const fetchPatchData = async () => {
+            const response = await fetchPatch(title);
+
             if (response.status !== 200) {
                 console.error("Error fetching patch data");
                 return;
             }
-
             setPatch(response.data);
         };
 
-        fetchPatch();
+        fetchPatchData();
+
     }, [title]);
 
     if (!patch) {
@@ -46,7 +50,7 @@ const PatchDetail: React.FC = () => {
                     <div className="flex flex-col md:flex-row text-text gap-x-3 gap-y-3">
                         <div className="flex flex-row gap-x-1 items-center justify-center">
                             <img src={PersonFill} alt="Person icon" className="w-4 h-4"/>
-                            <p>{patch.creator_username}</p>
+                            <Link to={`/profile/${patch.user.id}`}><p>{patch.user.username}</p></Link>
                         </div>
                         <div className="flex flex-row gap-x-1 items-center justify-center">
                             <img src={Callendar} alt="Callendar icon" className="w-4 h-4"/>
