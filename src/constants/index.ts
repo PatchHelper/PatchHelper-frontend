@@ -1,3 +1,11 @@
+import { FooterLinksInterface } from "../types";
+import { PatchContentElements, PatchContentVariants } from '../constants/Patch';
+
+export {
+    PatchContentElements,
+    PatchContentVariants
+}
+
 export const navLandingPageLinks = [
     {
         id: 'about',
@@ -77,13 +85,7 @@ export const InstructionsData = [
     "Filter for patches based on your selected game of choice",
     "Download and extract inside the game directory"
 ]
-interface FooterLinksInterface {
-    [key: string]: {
-        id: string;
-        label: string;
-    }[]
 
-}
 export const FooterLinks : FooterLinksInterface = {
     "About": [
         {

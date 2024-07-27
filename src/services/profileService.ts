@@ -18,7 +18,15 @@ const updateProfile = async (id: number | string, data: FormData) => {
     return response.data;
 };
 
+const getCurrentUser = async () => {
+    const response = await api.get(`/user/`);
+
+    return response.data;
+
+}
+
 export {
     getProfile,
     updateProfile,
+    getCurrentUser,
 };

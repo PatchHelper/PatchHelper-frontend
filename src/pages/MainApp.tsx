@@ -29,7 +29,7 @@ const MainApp: React.FC = () => {
             <h2 className="semiboldheader2 text-clr_primary">Recent uploads</h2>
             <div className="flex flex-col gap-y-4">
               {posts.map((patch, index) => (
-                <PatchOverview key={index} title={patch.title} description={patch.description} creator={patch.user} created_at={patch.created}  />
+                <PatchOverview key={patch.id} title={patch.title} description={patch.description} creator={patch.user} created_at={patch.created}  />
               ))}
             </div>
           </div>

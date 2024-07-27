@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { format } from 'date-fns';
 
+import PatchContent from "../components/PatchContent";
 import { fetchPatch } from "../services/patchService";
 import { Patch } from "../types";
 import { PersonFill, Callendar } from "../img";
@@ -63,9 +64,19 @@ const PatchDetail: React.FC = () => {
             <div id="Description" className="flex flex-col gap-y-3">
                 <h3 className="semiboldheader3 text-clr_primary">Description</h3>
                 <div className="flex flex-col align-middle justify-start gap-y-3 p-4 bg-background2 text-text">
-                    {patch.content.toString()} {/* TODO: Create a patch content display component*/}
+                    <p>{patch.description}</p>
                 </div>
             </div>
+            <div id="Content" className="flex flex-col gap-y-3">
+                    <h3 className="semiboldheader3 text-clr_primary">Content</h3>
+                    <div className="flex flex-col gap-y-2">
+                        {
+                            patch.content.map((element, index) => (
+                                <PatchContent key={index} type={element.type} content={element}/>
+                            ))
+                        }
+                    </div>
+                </div>
             <div id="Download" className="flex flex-col gap-y-3">
                 <h3 className="semiboldheader3 text-clr_primary">Download</h3>
                 {/* TODO: Create button components for stable, latest and beta releases */}
