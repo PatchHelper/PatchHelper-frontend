@@ -48,10 +48,16 @@ module.exports = {
           "0%": { "background-position-x": "1440px" },
           "100%": { "background-position-x": "0px" },
         },
+        "wave": {
+          "0%": {transform: "translateY(0)"},
+          "50%": {transform: "translateY(-20px)"},
+          "100%": {transform: "translateY(0)"},
+        }
       },
       animation: {
         "wave1": "wave-right 35s linear infinite",
         "wave2": "wave-left 20s linear infinite",
+        "waveUpDown": "wave 10s linear infinite",
       },
     },
   },

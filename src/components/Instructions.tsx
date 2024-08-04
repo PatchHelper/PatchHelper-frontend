@@ -1,6 +1,5 @@
 import React from "react";
-
-import { InstructionImage, ArrowDown } from "../img";
+import { InstructionImage } from "../img";
 import { InstructionsData } from "../constants";
 
 const Instructions: React.FC = () => {
@@ -11,13 +10,10 @@ const Instructions: React.FC = () => {
             </div>
             <div className="flex flex-col lg:flex-row justify-center items-center gap-y-6 gap-x-10">
                 <div className="flex flex-col justify-center align-middle items-center max-w-96 gap-y-2 p-7 bg-background2 rounded-3xl" data-aos="fade-up">
-                    {InstructionsData.map((instruction) => (
-                        <>
-                            <p className="text-text w-full">
-                                {instruction}
-                            </p>
-                            <img src={ArrowDown} alt="ArrowPointingDown" className="max-w-12 max-h-4"/>
-                        </>
+                    {InstructionsData.map((instruction, index) => (
+                        <p key={index} className="instruction text-text w-full">
+                            {instruction}
+                        </p>
                     ))}
                     <p className="text-text w-full">Enjoy your patched game. <span className="boldbasetext text-text">That’s it!</span></p>
                 </div>

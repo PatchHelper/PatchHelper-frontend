@@ -14,8 +14,8 @@ const About: React.FC = () => {
             <div id="content" className="flex flex-col lg:flex-row justify-center items-center gap-x-10 gap-y-6 mx-6">
                 <img draggable="false" src={AboutImage} alt="AboutImage" className="hidden md:flex md:max-w-96 lg:max-w-2xl" data-aos="fade-in"/>
                 <div id="content-collumn" className="flex flex-col gap-y-8" data-aos="fade-up">
-                    {AboutCardData.map((data) => (
-                        <InfoCard title={data.title} content={data.content}/>
+                    {AboutCardData.map((data, index) => (
+                        <InfoCard key={index} title={data.title} content={data.content}/>
                     ))}
                 </div>
             </div>

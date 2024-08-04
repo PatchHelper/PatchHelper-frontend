@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Routes ,Route} from 'react-router-dom';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 
@@ -24,22 +25,34 @@ const App: React.FC = () => {
         <Router>
             <div className="flex flex-col justify-start w-full min-h-[100vh] overflow-x-hidden gap-y-16">
                 <Navbar/>
-                    <Routes>
-                        <Route path="/" Component={LandingPage}/>
-                        <Route path="/patches" Component={MainApp}/>
-                        <Route path="/patches/new" Component={PatchCreate}/>
-                        <Route path="/patches/:title" Component={PatchDetail}/>
-
-                        <Route path="/register" Component={Register}/>
-                        <Route path="/login" Component={Login}/>
-                        <Route path="/logout" Component={Logout}/>
-                        <Route path="/profile/me" Component={ProfileEdit}/>
-                        <Route path="/profile/:id" Component={ProfileView}/>
-                    </Routes>
+                <AnimatedTransition />
                 <Footer />
             </div>
         </Router>
     );
+};
+
+const AnimatedTransition: React.FC = () => {
+    const location = useLocation();
+
+    return (
+        <TransitionGroup>
+        <CSSTransition key={location.key} timeout={300} classNames="fade">
+            <Routes location={location}>
+                <Route path="/" Component={LandingPage}/>
+                <Route path="/patches" Component={MainApp}/>
+                <Route path="/patches/new" Component={PatchCreate}/>
+                <Route path="/patches/:title" Component={PatchDetail}/>
+
+                <Route path="/register" Component={Register}/>
+                <Route path="/login" Component={Login}/>
+                <Route path="/logout" Component={Logout}/>
+                <Route path="/profile/me" Component={ProfileEdit}/>
+                <Route path="/profile/:id" Component={ProfileView}/>
+            </Routes>
+        </CSSTransition>
+    </TransitionGroup>
+    )
 };
 
 export default App;

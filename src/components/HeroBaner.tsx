@@ -14,7 +14,7 @@ const HeroBanner: React.FC = () => {
             <img 
               src={ HeroCard } 
               alt="HeroCard"
-              className="flex flex-auto object-fill width-[316px] height-[348px]" 
+              className="flex flex-auto width-[316px] height-[348px] animate-waveUpDown delay-0" 
             />
         </div>
     </div>
