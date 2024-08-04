@@ -1,10 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Editor } from '@tinymce/tinymce-react';
 
 import { PatchContentVariantsType, patchContent } from "../types";
-
-const TINYMCE_API_KEY = process.env.TINYMCE_API_KEY
-
+import { TINYMCE_API_KEY } from "../constants";
 
 interface PatchContentProps {
     index: number;
@@ -18,6 +16,11 @@ const PatchContentEditor: React.FC<PatchContentProps> = ({index, type = "textFie
     const contentIndex = type === "textField" ? "text" : "images"; 
     const [elementContent, setElementContent] = useState<any>(content[index][contentIndex]);
     content[index]["order"] = order;
+
+    useEffect(() => {
+        console.log('Environment:', process.env.NODE_ENV);
+        console.log('API Key:', process.env.REACT_APP_TINYMCE_API_KEY);
+    }, [elementContent]);
 
     const handleEditorChange = (elementContent: string) => {
         if (!(type === "textField")) { return }; // Handle only text fields

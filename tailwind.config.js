@@ -37,7 +37,23 @@ module.exports = {
 
       '2xl': '1536px',
       // => @media (min-width: 1536px) { ... }
-    }
+    },
+    extend: {
+      keyframes: {
+        "wave-right": {
+          "0%": { "background-position-x": "0px" },
+          "100%": { "background-position-x": "1440px" },
+        },
+        "wave-left": {
+          "0%": { "background-position-x": "1440px" },
+          "100%": { "background-position-x": "0px" },
+        },
+      },
+      animation: {
+        "wave1": "wave-right 35s linear infinite",
+        "wave2": "wave-left 20s linear infinite",
+      },
+    },
   },
   plugins: [],
 }

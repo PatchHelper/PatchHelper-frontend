@@ -10,6 +10,7 @@ import CloseMenu from "../img/close.svg";
 import SearchIcon from "../img/search.svg";
 import PersonFill from "../img/person-fill.svg";
 import PersonFillCircle from "../img/person-circle.svg";
+import Plus from "../img/plus-lg.svg";
 import Callendar from "../img/calendar.svg";
 
 // Spacers
@@ -28,5 +29,6 @@ export {
     InstructionImage,
     PersonFill,
     PersonFillCircle,
+    Plus,
     Callendar
 };

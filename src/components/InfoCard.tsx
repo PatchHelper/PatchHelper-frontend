@@ -7,7 +7,7 @@ interface InfoCardProps {
 
 const InfoCard: React.FC<InfoCardProps> = ({title, content}) => {
     return (
-        <div className="flex flex-col justify-start gap-y-2 bg-clr_primary p-4 rounded-2xl md:max-w-lg">
+        <div className="flex flex-col justify-start gap-y-2 bg-clr_primary p-4 rounded-2xl md:max-w-lg" data-aos="fade-up">
             <h3 className="semiboldheader3 text-text_secondary">
                 {title}
             </h3>

@@ -9,9 +9,14 @@ import Instructions from "./Instructions";
 import Footer from "./Footer";
 
 import Button from "./Button";
+import AsideBox from "./AsideBox";
 
 import PatchOverview from "./PatchOverwiev";
-import AsideBox from "./AsideBox";
+import PatchDetail from "../pages/PatchDetail";
+import PatchCreate from "../pages/PatchCreate";
+import PatchContent from "./PatchContent";
+import PatchContentEditor from "./PatchContentEditor";
+import PatchContentSelector from "./PatchContentSelector";
 
 export { 
     SimpleNavbar, 
@@ -24,6 +29,11 @@ export {
     Instructions,
     Footer,
     PatchOverview,
+    PatchDetail,
+    PatchCreate,
+    PatchContent,
+    PatchContentEditor,
+    PatchContentSelector,
     AsideBox,
     Button
 };

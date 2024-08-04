@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes ,Route} from 'react-router-dom';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 import LandingPage from './pages/LandingPage';
 import MainApp from './pages/MainApp';
@@ -10,9 +12,14 @@ import Logout from './pages/Logout';
 import ProfileView from './pages/ProfileView';
 import ProfileEdit from './pages/ProfileEdit';
 
-import { Navbar, Footer } from './components';
+import { Navbar, Footer, PatchCreate } from './components';
 
 const App: React.FC = () => {
+
+    useEffect(() => {
+        AOS.init({duration: 2000, mirror: true});
+    });
+
     return (
         <Router>
             <div className="flex flex-col justify-start w-full min-h-[100vh] overflow-x-hidden gap-y-16">
@@ -20,6 +27,7 @@ const App: React.FC = () => {
                     <Routes>
                         <Route path="/" Component={LandingPage}/>
                         <Route path="/patches" Component={MainApp}/>
+                        <Route path="/patches/new" Component={PatchCreate}/>
                         <Route path="/patches/:title" Component={PatchDetail}/>
 
                         <Route path="/register" Component={Register}/>

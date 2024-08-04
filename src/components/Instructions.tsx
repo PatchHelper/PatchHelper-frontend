@@ -10,7 +10,7 @@ const Instructions: React.FC = () => {
                 <h2 className="boldheader2 text-text">How to use</h2>
             </div>
             <div className="flex flex-col lg:flex-row justify-center items-center gap-y-6 gap-x-10">
-                <div className="flex flex-col justify-center align-middle items-center max-w-96 gap-y-2 p-7 bg-background2 rounded-3xl">
+                <div className="flex flex-col justify-center align-middle items-center max-w-96 gap-y-2 p-7 bg-background2 rounded-3xl" data-aos="fade-up">
                     {InstructionsData.map((instruction) => (
                         <>
                             <p className="text-text w-full">
@@ -21,7 +21,7 @@ const Instructions: React.FC = () => {
                     ))}
                     <p className="text-text w-full">Enjoy your patched game. <span className="boldbasetext text-text">That’s it!</span></p>
                 </div>
-                <img draggable="false" src={InstructionImage} alt="InstructionImage" className="hidden md:flex md:max-w-96 lg:max-w-2xl"/>
+                <img draggable="false" src={InstructionImage} alt="InstructionImage" className="hidden md:flex md:max-w-96 lg:max-w-2xl" data-aos="fade-in"/>
             </div>
         </div>
     );

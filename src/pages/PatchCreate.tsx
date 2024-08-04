@@ -2,12 +2,11 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { format } from "date-fns";
 
-import PatchContentSelector from "../components/PatchContentSelectort";
-import PatchContentEditor from "../components/PatchContentEditor";
+import { PatchContentEditor, PatchContentSelector } from "../components";
 
 import api from "../utils/api";
 import { PersonFill, Callendar } from "../img";
-import { Patch, patchContent, User } from "../types";
+import { patchContent, User } from "../types";
 import { getCurrentUser } from "../services/profileService";
 import { Button } from "../components";
 
@@ -26,8 +25,7 @@ const PatchCreate: React.FC = () => {
             if (response) {
                 setUser(response);
             }
-        };
-
+    };
         fetchUser();
     }, []);
 
@@ -82,13 +80,13 @@ const PatchCreate: React.FC = () => {
                     {/* TODO: Add an thumbnail component here */}
                     <div id="PatchInfo" className="flex flex-col gap-y-3">
                         <div className="flex flex-wrap gap-x-2 gap-y-2">
-                            <input className="semiboldheader3 md:semiboldheader2 text-clr_primary bg-background" value={title} onChange={(e) => setTitle(e.target.value)} />
-                            <input className="semiboldheader3 md:semiboldheader2 text-text opacity-70 bg-background max-w-16" value={version} onChange={(e) => setVersion(e.target.value)}/>
+                            <input className="semiboldheader3 md:semiboldheader2 text-clr_primary bg-background border-2 border-dashed border-text rounded-lg p-2" value={title} onChange={(e) => setTitle(e.target.value)} />
+                            <input className="semiboldheader3 md:semiboldheader2 text-text opacity-70 bg-background max-w-24 border-2 border-dashed border-text rounded-lg p-2" value={version} onChange={(e) => setVersion(e.target.value)}/>
                         </div>
                         <div className="flex flex-col md:flex-row text-text gap-x-3 gap-y-3">
                             <div className="flex flex-row gap-x-1 items-center justify-center">
                                 <img src={PersonFill} alt="Person icon" className="w-4 h-4"/>
-                                <Link to={`/profile/${user.id}`}><p>{user.username}</p></Link>
+                                <Link to={`/profile/${user.id}`}><p className="text-text cursor-pointer hover:opacity-70">{user.username}</p></Link>
                             </div>
                             <div className="flex flex-row gap-x-1 items-center justify-center">
                                 <img src={Callendar} alt="Callendar icon" className="w-4 h-4"/>
@@ -100,7 +98,7 @@ const PatchCreate: React.FC = () => {
                 </div>
                 <div id="Description" className="flex flex-col gap-y-3">
                     <h3 className="semiboldheader3 text-clr_primary">Description</h3>
-                    <input className="text-base text-text bg-background2" value={description} onChange={(e) => setDescription(e.target.value)}/>
+                    <input className="text-base text-text bg-background2 p-2 border-2 border-dashed border-text rounded-lg" value={description} onChange={(e) => setDescription(e.target.value)}/>
                 </div>
                 <div id="Content" className="flex flex-col gap-y-3">
                     <h3 className="semiboldheader3 text-clr_primary">Content</h3>
@@ -110,7 +108,7 @@ const PatchCreate: React.FC = () => {
                                 <PatchContentEditor key={index} index={index} type={element.type} content={content} setContent={setContent} order={index}/>
                             ))
                         }
-                        <PatchContentSelector postContent={content} postContentSetter={setContent}/>
+                        <PatchContentSelector postContent={content} setPostContent={setContent}/>
                     </div>
                 </div>
                 <div id="Download" className="flex flex-col gap-y-3">
