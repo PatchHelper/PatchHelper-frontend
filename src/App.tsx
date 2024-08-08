@@ -14,6 +14,7 @@ import ProfileView from './pages/ProfileView';
 import ProfileEdit from './pages/ProfileEdit';
 
 import { Navbar, Footer, PatchCreate } from './components';
+import Patches from './pages/Patches';
 
 const App: React.FC = () => {
 
@@ -43,6 +44,7 @@ const AnimatedTransition: React.FC = () => {
                 <Route path="/patches" Component={MainApp}/>
                 <Route path="/patches/new" Component={PatchCreate}/>
                 <Route path="/patches/:title" Component={PatchDetail}/>
+                <Route path="/files" Component={Patches}/>
 
                 <Route path="/register" Component={Register}/>
                 <Route path="/login" Component={Login}/>

@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { format } from 'date-fns';
+import { format, set } from 'date-fns';
 
 import PatchContent from "../components/PatchContent";
-import { fetchPatch } from "../services/patchService";
-import { Patch } from "../types";
+import { fetchPatch, fetchPatchContent } from "../services/patchService";
+import { Patch, patchContent } from "../types";
 import { PersonFill, Callendar } from "../img";
 
 const PatchDetail: React.FC = () => {
     const { title } = useParams<{ title: string}>();
     const [patch, setPatch] = useState<Patch | null>(null);
+    const [patchContents, setPatchContents] = useState<patchContent[]>([]);
 
     useEffect(() => {
         if (!title) {
@@ -17,15 +18,26 @@ const PatchDetail: React.FC = () => {
             return;
         }
         const fetchPatchData = async () => {
-            const response = await fetchPatch(title);
+            const patch_response = await fetchPatch(title);
 
-            if (response.status !== 200) {
+            if (patch_response.status !== 200) {
                 console.error("Error fetching patch data");
                 return;
             }
-            setPatch(response.data);
-        };
+            setPatch(patch_response.data);
 
+
+            const content_response = await fetchPatchContent(title);
+            
+            if (content_response.status !== 200) {
+                console.error("Error fetching patch data");
+                return;
+            }
+
+            setPatchContents(content_response.data);
+
+        };
+        
         fetchPatchData();
 
     }, [title]);
@@ -71,7 +83,7 @@ const PatchDetail: React.FC = () => {
                     <h3 className="semiboldheader3 text-clr_primary">Content</h3>
                     <div className="flex flex-col gap-y-2">
                         {
-                            patch.content.map((element, index) => (
+                            patchContents.map((element, index) => (
                                 <PatchContent key={index} type={element.type} content={element}/>
                             ))
                         }

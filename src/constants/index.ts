@@ -32,7 +32,7 @@ export const navMainAppLinks = {
         label: 'Dashboard',
     },
     {
-        id: 'latest',
+        id: 'files',
         label: 'Patches'
     },
     {

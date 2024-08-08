@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 interface ButtonProps {
     variant?: "primary" | "secondary";
@@ -7,6 +8,7 @@ interface ButtonProps {
     onClick?: () => void;
     type?: "button" | "submit" | "reset";
     className?: string;
+    link?: string;
 }
 
 const ButtonStyles = {
@@ -20,10 +22,10 @@ const ButtonStyles = {
     },
 };
 
-const Button: React.FC<ButtonProps> = ({variant="primary", fill="solid", text, onClick= () => {}, type="button", className=""}) => {
+const Button: React.FC<ButtonProps> = ({variant="primary", fill="solid", text, onClick= () => {}, type="button", className="", link}) => {
     return (
         <button className={`${ButtonStyles[variant][fill]} flex flex-row justify-center items-center p-4 text-basetext rounded-2xl align-middle ${className}`} type={type}>
-            {text}
+            {link? <Link to={link}>{text}</Link>: text}
         </button>
     );
 };
