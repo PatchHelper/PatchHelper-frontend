@@ -10,6 +10,7 @@ import Footer from "./Footer";
 
 import Button from "./Button";
 import AsideBox from "./AsideBox";
+import PageController from "./PageController";
 
 import PatchOverview from "./PatchOverwiev";
 import PatchDetail from "../pages/PatchDetail";
@@ -35,5 +36,6 @@ export {
     PatchContentEditor,
     PatchContentSelector,
     AsideBox,
-    Button
+    Button,
+    PageController
 };

@@ -12,6 +12,9 @@ import PersonFill from "../img/person-fill.svg";
 import PersonFillCircle from "../img/person-circle.svg";
 import Plus from "../img/plus-lg.svg";
 import Callendar from "../img/calendar.svg";
+import Upvote from "../img/upvote.svg";
+import Report from "../img/report.svg";
+import Share from "../img/share.svg";
 
 // Spacers
 import ImageSpacer1 from "../img/ImageSpacer1.svg";
@@ -30,5 +33,8 @@ export {
     PersonFill,
     PersonFillCircle,
     Plus,
-    Callendar
+    Callendar,
+    Upvote,
+    Report,
+    Share
 };

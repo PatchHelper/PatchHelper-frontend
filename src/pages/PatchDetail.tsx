@@ -5,7 +5,7 @@ import { format, set } from 'date-fns';
 import PatchContent from "../components/PatchContent";
 import { fetchPatch, fetchPatchContent } from "../services/patchService";
 import { Patch, patchContent } from "../types";
-import { PersonFill, Callendar } from "../img";
+import { PersonFill, Callendar, Share, Upvote, Report } from "../img";
 
 const PatchDetail: React.FC = () => {
     const { title } = useParams<{ title: string}>();
@@ -92,6 +92,21 @@ const PatchDetail: React.FC = () => {
             <div id="Download" className="flex flex-col gap-y-3">
                 <h3 className="semiboldheader3 text-clr_primary">Download</h3>
                 {/* TODO: Create button components for stable, latest and beta releases */}
+            </div>
+            {/* TODO: Add functionality to all buttons */}
+            <div id="Controlls" className="flex flex-row justify-center md:justify-end gap-x-4 p-4 bg-background2 select-none">
+                <div id="ShareButton" className="flex flex-row gap-x-2 items-center align-middle cursor-pointer hover:border-2 hover:border-clr_primary box-border border-2 border-background2">
+                    <p className="basetext text-text">Share</p>
+                    <img src={Share} alt="Share icon" className="w-6 h-6"/>
+                </div>
+                <div id="UpvoteButton" className="flex flex-row gap-x-2 items-center align-middle cursor-pointer hover:border-2 hover:border-clr_primary box-border border-2 border-background2">
+                    <p className="basetext text-text">Upvote</p>
+                    <img src={Upvote} alt="Upvote icon" className="w-6 h-6"/>
+                </div>
+                <div id="ReportButton" className="flex flex-row gap-x-2 items-center align-middle cursor-pointer hover:border-2 hover:border-clr_primary box-border border-2 border-background2">
+                    <p className="basetext text-text">Report</p>
+                    <img src={Report} alt="Report icon" className="w-6 h-6"/>
+                </div>
             </div>
         </main>
     );

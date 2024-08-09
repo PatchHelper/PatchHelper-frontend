@@ -2,8 +2,7 @@ import React, { useState, useEffect} from "react";
 
 import { Patch } from "../types";
 import { fetchPatches } from "../services/patchService";
-import { PatchOverview, AsideBox, Button } from "../components";
-import { set } from "date-fns";
+import { PatchOverview, AsideBox, Button, PageController } from "../components";
 
 const SortingOptions = ["New", "Recent", "Top Rated", "Most Downloaded"];
 type SortBy = typeof SortingOptions[number];
@@ -42,7 +41,7 @@ const Patches: React.FC = () => {
                 <Button variant="primary" text="New Patch" link="/patches/new" className="lg:ml-auto max-w-28"/>
             </div>
             <div className="flex flex-col gap-y-3">
-                {/* Add page controlls here */}
+                <PageController/>
                 <div id="SortBy" className="flex flex-row bg-background2 gap-x-6 p-4">
                     {SortingOptions.map((value, index) => (
                         <p key={index} className={`basetext text-text cursor-pointer select-none ${value === sort? "opacity-100" : "opacity-70"}`} onClick={() => changeSorting(value)}>{value}</p>

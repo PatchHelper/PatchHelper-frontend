@@ -1,6 +1,7 @@
 import api from '../utils/api';
 
 const fetchPatches = async (sort?: string) => {
+    // TODO: Implement sorting
     const url = '/patches/';
     const response = await api.get(url);
 
