@@ -132,3 +132,5 @@ export const FooterLinks : FooterLinksInterface = {
         },
     ]
 }
+
+export const PatchesPerPage = 10;

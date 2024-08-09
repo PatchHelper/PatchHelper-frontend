@@ -6,12 +6,13 @@ import { PatchOverview, AsideBox } from "../components";
 
 const MainApp: React.FC = () => {
   const [posts, setPosts] = useState<Patch[]>([]);
+  const currentPage = 1;
     
   useEffect(() => {
       const fetchPosts = async () => {
-        const response = await fetchPatches();
+        const response = await fetchPatches(currentPage);
 
-        setPosts(response.data);
+        setPosts(response.data.results);
       };
 
       fetchPosts();

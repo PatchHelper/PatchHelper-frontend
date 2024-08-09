@@ -15,6 +15,8 @@ import Callendar from "../img/calendar.svg";
 import Upvote from "../img/upvote.svg";
 import Report from "../img/report.svg";
 import Share from "../img/share.svg";
+import Previous from "../img/previous.svg";
+import Next from "../img/next.svg";
 
 // Spacers
 import ImageSpacer1 from "../img/ImageSpacer1.svg";
@@ -36,5 +38,7 @@ export {
     Callendar,
     Upvote,
     Report,
-    Share
+    Share,
+    Previous,
+    Next
 };

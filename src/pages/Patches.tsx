@@ -1,6 +1,7 @@
 import React, { useState, useEffect} from "react";
 
 import { Patch } from "../types";
+import { PatchesPerPage } from "../constants";
 import { fetchPatches } from "../services/patchService";
 import { PatchOverview, AsideBox, Button, PageController } from "../components";
 
@@ -10,26 +11,53 @@ type SortBy = typeof SortingOptions[number];
 const Patches: React.FC = () => {
     const [posts, setPosts] = useState<Patch[]>([]);
     const [sort, setSort] = useState<SortBy>("New");
+
+    // Pagination
+    const [currentPage, setCurrentPage] = useState<number>(1);
+    const [totalPages, setTotalPages] = useState<number>(1);
+    const [nextPage, setNextPage] = useState<string | null>(null);
+    const [previousPage, setPreviousPage] = useState<string | null>(null);
     
+    const fetchPosts = async (page: number) => {
+      const response = await fetchPatches(page, sort);
+
+      setPosts(response.data.results);
+      setNextPage(response.data.next);
+      setPreviousPage(response.data.previous);
+    };
+
     useEffect(() => {
         const fetchPosts = async () => {
-          const response = await fetchPatches();
+          const response = await fetchPatches(currentPage);
   
-          setPosts(response.data);
+          setPosts(response.data.results);
+          setTotalPages(Math.ceil(response.data.count / PatchesPerPage));
+          setNextPage(response.data.next);
+          setPreviousPage(response.data.previous);
         };
   
         fetchPosts();
     }, []);
 
     const changeSorting = (sort: SortBy) => {
-        const fetchPosts = async () => {
-            const response = await fetchPatches(sort);
-    
-            setPosts(response.data);
-          };
-        
         setSort(sort);
-        fetchPosts();
+        fetchPosts(currentPage);
+    }
+    const onPageChange = (page: number) => {
+      setCurrentPage(page);
+      fetchPosts(page);
+    }
+    const handleNext = () => {
+      if (nextPage) {
+        setCurrentPage(currentPage + 1);
+        fetchPosts(currentPage + 1);
+      }
+    }
+    const handlePrevious = () => {
+      if (previousPage) {
+        setCurrentPage(currentPage - 1);
+        fetchPosts(currentPage - 1);
+      }
     }
 
     return (
@@ -41,7 +69,17 @@ const Patches: React.FC = () => {
                 <Button variant="primary" text="New Patch" link="/patches/new" className="lg:ml-auto max-w-28"/>
             </div>
             <div className="flex flex-col gap-y-3">
-                <PageController/>
+                <div className={`flex flex-row justify-center ${totalPages===1? "hidden" : "visible"}`}>
+                  <PageController 
+                    totalPages={totalPages} 
+                    currentPage={currentPage} 
+                    onPageChange={onPageChange}
+                    onNext={handleNext}
+                    onPrevious={handlePrevious}
+                    hasNext={!!nextPage}
+                    hasPrevious={!!previousPage}
+                  />
+                </div>
                 <div id="SortBy" className="flex flex-row bg-background2 gap-x-6 p-4">
                     {SortingOptions.map((value, index) => (
                         <p key={index} className={`basetext text-text cursor-pointer select-none ${value === sort? "opacity-100" : "opacity-70"}`} onClick={() => changeSorting(value)}>{value}</p>
@@ -52,11 +90,22 @@ const Patches: React.FC = () => {
               <h2 className="semiboldheader2 text-clr_primary">Recent uploads</h2>
               <div className="flex flex-col gap-y-4">
                 {posts.map((patch, index) => (
-                  <PatchOverview key={patch.id} title={patch.title} description={patch.description} creator={patch.user} created_at={patch.created}  />
+                  <PatchOverview key={index} title={patch.title} description={patch.description} creator={patch.user} created_at={patch.created}  />
                 ))}
               </div>
             </div>
           </div>
+          <div className={`flex flex-row justify-center ${totalPages===1? "hidden" : "visible"}`}>
+                  <PageController 
+                    totalPages={totalPages} 
+                    currentPage={currentPage} 
+                    onPageChange={onPageChange}
+                    onNext={handleNext}
+                    onPrevious={handlePrevious}
+                    hasNext={!!nextPage}
+                    hasPrevious={!!previousPage}
+                  />
+                </div>
           <aside id="AsideCol" className="hidden md:w-[28%] md:flex flex-col gap-y-8">
             <AsideBox variant="register" />
             <AsideBox variant="statistics" />

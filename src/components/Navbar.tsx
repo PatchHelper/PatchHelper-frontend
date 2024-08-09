@@ -21,7 +21,9 @@ const Navbar: React.FC = () => {
                     {navMainAppLinks.main_links.map((link) => (
                         <li 
                         key={link.id}
-                        className='cursor-pointer semiboldheader4 transition duration-250 hover:opacity-75'>
+                        className='cursor-pointer semiboldheader4 transition duration-250 hover:opacity-75'
+                        onClick={() => setToggle(false)}
+                        >
                             <Link to={`/${link.id}`}>
                                 {link.label==="Search"? <img src={SearchIcon} alt="SearchIcon"/> : link.label}
                             </Link>
@@ -32,7 +34,9 @@ const Navbar: React.FC = () => {
                     {navMainAppLinks.user_links[userState].map((link) => (
                         <li 
                         key={link.id}
-                        className='cursor-pointer semiboldheader4 transition duration-250 hover:opacity-75'>
+                        className='cursor-pointer semiboldheader4 transition duration-250 hover:opacity-75'
+                        onClick={() => setToggle(false)}
+                        >
                             <Link to={`/${link.id}`}>
                                 {link.label}
                             </Link>
@@ -54,7 +58,9 @@ const Navbar: React.FC = () => {
                         {navMainAppLinks.main_links.map((link) => (
                             <li 
                               key={link.id}
-                              className='cursor-pointer semiboldheader4 transition duration-250 hover:opacity-75'>
+                              className='cursor-pointer semiboldheader4 transition duration-250 hover:opacity-75'
+                              onClick={() => setToggle(false)}
+                              >
                                 <Link to={`/${link.id}`} className='text-text'>
                                     {link.label}
                                 </Link>
@@ -65,7 +71,9 @@ const Navbar: React.FC = () => {
                         {navMainAppLinks.user_links[userState].map((link) => (
                             <li 
                               key={link.id}
-                              className='cursor-pointer semiboldheader4 transition duration-250 hover:opacity-75'>
+                              className='cursor-pointer semiboldheader4 transition duration-250 hover:opacity-75'
+                              onClick={() => setToggle(false)}
+                              >
                                 <Link to={`/${link.id}`} className='text-text'>
                                     {link.label}
                                 </Link>
