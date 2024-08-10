@@ -3,7 +3,8 @@ import React, { useState, useEffect} from "react";
 import { Patch } from "../types";
 import { PatchesPerPage } from "../constants";
 import { fetchPatches } from "../services/patchService";
-import { PatchOverview, AsideBox, Button, PageController } from "../components";
+import { isLoggedIn } from "../utils/auth"; 
+import { PatchOverview, AsideBox, Button, PageController, LoginModal } from "../components";
 
 const SortingOptions = {
   "New": "-created",
@@ -16,6 +17,10 @@ type SortBy = keyof typeof SortingOptions;
 const Patches: React.FC = () => {
     const [posts, setPosts] = useState<Patch[]>([]);
     const [sort, setSort] = useState<string>("-created");
+    const [showLoginModal, setShowLoginModal] = useState<boolean>(false);
+
+    const loggedIn = isLoggedIn();
+    console.log(loggedIn);
 
     // Pagination
     const [currentPage, setCurrentPage] = useState<number>(1);
@@ -69,11 +74,13 @@ const Patches: React.FC = () => {
 
     return (
         <main className="flex flex-col gap-y-8 px-8 md:px-[11.25%]">
+        <LoginModal show={showLoginModal} onClose={() => setShowLoginModal(!showLoginModal)}/>
         <div id="Content" className="flex flex-row gap-x-9">
           <div id="PatchesCol" className="flex flex-col gap-y-8 md:w-[70%]">
             <div id="Title" className="flex flex-col lg:flex-row gap-y-2">
                 <h1 className="boldheader3 text-text">Patch Database</h1>
-                <Button variant="primary" text="New Patch" link="/patches/new" className="lg:ml-auto max-w-28"/>
+                {loggedIn && <Button variant="primary" text="New Patch" link="/patches/new" className="lg:ml-auto max-w-28"/>}
+                {!loggedIn && <Button variant="primary" text="New Patch" className="lg:ml-auto max-w-28" onClick={() => setShowLoginModal(!showLoginModal)}/>}
             </div>
             <div className="flex flex-col gap-y-3">
                 <div className={`flex flex-row justify-center ${totalPages===1? "hidden" : "visible"}`}>
@@ -100,7 +107,7 @@ const Patches: React.FC = () => {
               <h2 className="semiboldheader2 text-clr_primary">Recent uploads</h2>
               <div className="flex flex-col gap-y-4">
                 {posts.map((patch, index) => (
-                  <PatchOverview key={index} title={patch.title} description={patch.description} creator={patch.user} created_at={patch.created}  />
+                  <PatchOverview key={index} title={patch.title} description={patch.description} creator={patch.user} created_at={patch.created} upvotes={patch.upvotes}/>
                 ))}
               </div>
             </div>

@@ -1,4 +1,5 @@
 import api from '../utils/api';
+import axios from 'axios';
 
 const fetchPatches = async (page: number, sort?: string) => {
     if (!sort) {
@@ -25,8 +26,14 @@ const fetchPatchContent = async (title: string) => {
     return response;
 }
 
+const handleUpvote = async (id: number) => {
+    const response = await api.post(`/patches/${id}/upvote/`);
+    return response;
+}
+
 export {
     fetchPatches,
     fetchPatch,
     fetchPatchContent,
+    handleUpvote
 };

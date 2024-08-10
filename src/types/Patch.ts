@@ -24,4 +24,5 @@ export interface Patch {
         id: number;
         username: string;
     };
+    upvotes: number;
 };
