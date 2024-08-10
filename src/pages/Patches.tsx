@@ -5,12 +5,17 @@ import { PatchesPerPage } from "../constants";
 import { fetchPatches } from "../services/patchService";
 import { PatchOverview, AsideBox, Button, PageController } from "../components";
 
-const SortingOptions = ["New", "Recent", "Top Rated", "Most Downloaded"];
-type SortBy = typeof SortingOptions[number];
+const SortingOptions = {
+  "New": "-created",
+  "Recent": "-updated",
+  "Top Rated": "-upvotes",
+  "Most Downloaded": "-downloads"
+}
+type SortBy = keyof typeof SortingOptions;
 
 const Patches: React.FC = () => {
     const [posts, setPosts] = useState<Patch[]>([]);
-    const [sort, setSort] = useState<SortBy>("New");
+    const [sort, setSort] = useState<string>("-created");
 
     // Pagination
     const [currentPage, setCurrentPage] = useState<number>(1);
@@ -18,7 +23,7 @@ const Patches: React.FC = () => {
     const [nextPage, setNextPage] = useState<string | null>(null);
     const [previousPage, setPreviousPage] = useState<string | null>(null);
     
-    const fetchPosts = async (page: number) => {
+    const fetchPosts = async (page: number, sort?: string) => {
       const response = await fetchPatches(page, sort);
 
       setPosts(response.data.results);
@@ -40,8 +45,10 @@ const Patches: React.FC = () => {
     }, [currentPage]);
 
     const changeSorting = (sort: SortBy) => {
-        setSort(sort);
-        fetchPosts(currentPage);
+        const sorting = SortingOptions[sort];
+
+        setSort(sorting);
+        fetchPosts(currentPage, sorting);
     }
     const onPageChange = (page: number) => {
       setCurrentPage(page);
@@ -81,9 +88,12 @@ const Patches: React.FC = () => {
                   />
                 </div>
                 <div id="SortBy" className="flex flex-row bg-background2 gap-x-6 p-4">
-                    {SortingOptions.map((value, index) => (
-                        <p key={index} className={`basetext text-text cursor-pointer select-none ${value === sort? "opacity-100" : "opacity-70"}`} onClick={() => changeSorting(value)}>{value}</p>
-                    ))}
+                    
+                    {Object.keys(SortingOptions).map((value, index) => {
+                        const sortByKey = value as SortBy;
+                        return (
+                        <p key={index} className={`basetext text-text cursor-pointer select-none ${ SortingOptions[sortByKey] === sort? "opacity-100" : "opacity-70"}`} onClick={() => changeSorting(sortByKey)}>{value}</p>
+                    );})}
                 </div>
             </div>
             <div id="LatestUploads" className="flex flex-col gap-y-6">
