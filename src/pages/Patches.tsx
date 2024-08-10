@@ -37,7 +37,7 @@ const Patches: React.FC = () => {
         };
   
         fetchPosts();
-    }, []);
+    }, [currentPage]);
 
     const changeSorting = (sort: SortBy) => {
         setSort(sort);
@@ -94,8 +94,7 @@ const Patches: React.FC = () => {
                 ))}
               </div>
             </div>
-          </div>
-          <div className={`flex flex-row justify-center ${totalPages===1? "hidden" : "visible"}`}>
+            <div className={`flex flex-row justify-center ${totalPages===1? "hidden" : "visible"}`}>
                   <PageController 
                     totalPages={totalPages} 
                     currentPage={currentPage} 
@@ -105,7 +104,8 @@ const Patches: React.FC = () => {
                     hasNext={!!nextPage}
                     hasPrevious={!!previousPage}
                   />
-                </div>
+            </div>
+          </div>
           <aside id="AsideCol" className="hidden md:w-[28%] md:flex flex-col gap-y-8">
             <AsideBox variant="register" />
             <AsideBox variant="statistics" />

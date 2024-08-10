@@ -19,6 +19,9 @@ import PatchContent from "./PatchContent";
 import PatchContentEditor from "./PatchContentEditor";
 import PatchContentSelector from "./PatchContentSelector";
 
+// Modals
+import ShareModal from "./modals/Share";
+
 export { 
     SimpleNavbar, 
     Navbar,
@@ -37,5 +40,6 @@ export {
     PatchContentSelector,
     AsideBox,
     Button,
-    PageController
+    PageController,
+    ShareModal
 };

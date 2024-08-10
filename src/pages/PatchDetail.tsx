@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { format, set } from 'date-fns';
+import { format } from 'date-fns';
 
-import PatchContent from "../components/PatchContent";
+import { PatchContent, ShareModal } from "../components";
 import { fetchPatch, fetchPatchContent } from "../services/patchService";
 import { Patch, patchContent } from "../types";
 import { PersonFill, Callendar, Share, Upvote, Report } from "../img";
@@ -11,6 +11,7 @@ const PatchDetail: React.FC = () => {
     const { title } = useParams<{ title: string}>();
     const [patch, setPatch] = useState<Patch | null>(null);
     const [patchContents, setPatchContents] = useState<patchContent[]>([]);
+    const [showShareModal, setShowShareModal] = useState<boolean>(false);
 
     useEffect(() => {
         if (!title) {
@@ -42,6 +43,11 @@ const PatchDetail: React.FC = () => {
 
     }, [title]);
 
+    function toggleShareModal() {
+        console.log(showShareModal);
+        setShowShareModal(!showShareModal);
+    }
+
     if (!patch) {
         return (
             <div>
@@ -53,6 +59,7 @@ const PatchDetail: React.FC = () => {
 
     return (
         <main className="flex flex-col gap-y-8 px-8 md:px-[11.25%]">
+            <ShareModal show={showShareModal} onClose={toggleShareModal}/>
             <div id="TitleBar" className="flex flex-row gap-x-8">
                 {/* TODO: Add an thumbnail component here */}
                 <div id="PatchInfo" className="flex flex-col gap-y-3">
@@ -95,7 +102,7 @@ const PatchDetail: React.FC = () => {
             </div>
             {/* TODO: Add functionality to all buttons */}
             <div id="Controlls" className="flex flex-row justify-center md:justify-end gap-x-4 p-4 bg-background2 select-none">
-                <div id="ShareButton" className="flex flex-row gap-x-2 items-center align-middle cursor-pointer hover:border-2 hover:border-clr_primary box-border border-2 border-background2">
+                <div id="ShareButton" className="flex flex-row gap-x-2 items-center align-middle cursor-pointer hover:border-2 hover:border-clr_primary box-border border-2 border-background2" onClick={toggleShareModal}>
                     <p className="basetext text-text">Share</p>
                     <img src={Share} alt="Share icon" className="w-6 h-6"/>
                 </div>

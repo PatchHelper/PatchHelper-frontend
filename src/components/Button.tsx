@@ -24,7 +24,7 @@ const ButtonStyles = {
 
 const Button: React.FC<ButtonProps> = ({variant="primary", fill="solid", text, onClick= () => {}, type="button", className="", link}) => {
     return (
-        <button className={`${ButtonStyles[variant][fill]} flex flex-row justify-center items-center p-4 text-basetext rounded-2xl align-middle ${className}`} type={type}>
+        <button className={`${ButtonStyles[variant][fill]} flex flex-row justify-center items-center p-4 text-basetext rounded-2xl align-middle ${className}`} type={type} onClick={onClick}>
             {link? <Link to={link}>{text}</Link>: text}
         </button>
     );
