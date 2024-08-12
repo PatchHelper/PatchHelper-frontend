@@ -1,4 +1,4 @@
-import { PatchContentElements } from "../constants";
+import { PatchContentElements, PatchSortingOptions } from "../constants";
 
 export type PatchContentVariantsType = keyof typeof PatchContentElements;
 
@@ -26,3 +26,5 @@ export interface Patch {
     };
     upvotes: number;
 };
+
+export type PatchSortingOptionsType = keyof typeof PatchSortingOptions;

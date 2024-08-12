@@ -12,9 +12,11 @@ import Login from './pages/Login';
 import Logout from './pages/Logout';
 import ProfileView from './pages/ProfileView';
 import ProfileEdit from './pages/ProfileEdit';
+import Patches from './pages/Patches';
+import UserPatchesEdit from './pages/UserPatchesEdit';
+import UserPatchesList from './pages/UserPatchesList';
 
 import { Navbar, Footer, PatchCreate } from './components';
-import Patches from './pages/Patches';
 
 const App: React.FC = () => {
 
@@ -51,6 +53,8 @@ const AnimatedTransition: React.FC = () => {
                 <Route path="/logout" Component={Logout}/>
                 <Route path="/profile/me" Component={ProfileEdit}/>
                 <Route path="/profile/:id" Component={ProfileView}/>
+                <Route path="/profile/me/patches" Component={UserPatchesEdit}/>
+                <Route path="/profile/:id/patches" Component={UserPatchesList}/>
             </Routes>
         </CSSTransition>
     </TransitionGroup>

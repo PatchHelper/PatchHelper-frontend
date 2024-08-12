@@ -1,5 +1,5 @@
 import { FooterLinksInterface } from "../types";
-import { PatchContentElements, PatchContentVariants } from '../constants/Patch';
+import { PatchContentElements, PatchContentVariants, PatchSortingOptions } from '../constants/Patch';
 
 const TINYMCE_API_KEY = process.env.REACT_APP_TINYMCE_API_KEY;
 
@@ -7,7 +7,8 @@ export {
     TINYMCE_API_KEY,
 
     PatchContentElements,
-    PatchContentVariants
+    PatchContentVariants,
+    PatchSortingOptions
 }
 
 export const navLandingPageLinks = [

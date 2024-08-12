@@ -19,3 +19,10 @@ export const PatchContentElements: PatchContentElementsType = {
 };
 
 export const PatchContentVariants = Object.keys(PatchContentElements) as PatchContentVariantsType[];
+
+export const PatchSortingOptions = {
+    "New": "-created",
+    "Recent": "-updated",
+    "Top Rated": "-upvotes",
+    "Most Downloaded": "-downloads"
+  }

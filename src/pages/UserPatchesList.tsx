@@ -1,88 +1,74 @@
-import React, { useState, useEffect} from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { useParams } from 'react-router-dom';
 
-import { Patch, PatchSortingOptionsType } from "../types";
-import { PatchesPerPage, PatchSortingOptions } from "../constants";
-import { fetchPatches } from "../services/patchService";
-import { isLoggedIn } from "../utils/auth"; 
-import { PatchOverview, AsideBox, Button, PageController, LoginModal } from "../components";
+import { PatchSortingOptionsType, Patch } from "../types";
+import { PatchSortingOptions, PatchesPerPage } from "../constants";
+import { fetchUserPatches } from "../services/patchService";
+import { PatchOverview, PageController } from "../components";
 
-const Patches: React.FC = () => {
+const UserPatchesList: React.FC = () => {
+    const id = useParams<{ id: string }>().id;
     const [posts, setPosts] = useState<Patch[]>([]);
     const [sort, setSort] = useState<string>("-created");
-    const [showLoginModal, setShowLoginModal] = useState<boolean>(false);
-
-    const loggedIn = isLoggedIn();
-    console.log(loggedIn);
 
     // Pagination
     const [currentPage, setCurrentPage] = useState<number>(1);
     const [totalPages, setTotalPages] = useState<number>(1);
     const [nextPage, setNextPage] = useState<string | null>(null);
     const [previousPage, setPreviousPage] = useState<string | null>(null);
-    
-    const fetchPosts = async (page: number, sort?: string) => {
-      const response = await fetchPatches(page, sort);
 
-      setPosts(response.data.results);
-      setNextPage(response.data.next);
-      setPreviousPage(response.data.previous);
-    };
+    const fetchPatches= async (page: number, id: number, sort?: string) => {
+        const response = await fetchUserPatches(page, id, sort);
+  
+        setPosts(response.data.results);
+        setTotalPages(Math.ceil(response.data.count / PatchesPerPage));
+        setNextPage(response.data.next);
+        setPreviousPage(response.data.previous);
+      };
 
     useEffect(() => {
-        const fetchPosts = async () => {
-          const response = await fetchPatches(currentPage);
-  
-          setPosts(response.data.results);
-          setTotalPages(Math.ceil(response.data.count / PatchesPerPage));
-          setNextPage(response.data.next);
-          setPreviousPage(response.data.previous);
-        };
-  
-        fetchPosts();
-    }, [currentPage]);
+        if (!id) {
+            console.error("No user id provided");
+            return;
+        }
+
+        fetchPatches(1, parseInt(id), "-created");
+    }, [id]);
 
     const changeSorting = (sort: PatchSortingOptionsType) => {
+        if (!id) {
+            console.error("No user id provided");
+            return;
+        }
+
         const sorting = PatchSortingOptions[sort];
 
         setSort(sorting);
-        fetchPosts(currentPage, sorting);
+        fetchUserPatches(currentPage, parseInt(id), sorting);
     }
     const onPageChange = (page: number) => {
       setCurrentPage(page);
-      fetchPosts(page);
+      fetchUserPatches(page);
     }
     const handleNext = () => {
       if (nextPage) {
         setCurrentPage(currentPage + 1);
-        fetchPosts(currentPage + 1);
+        fetchUserPatches(currentPage + 1);
       }
     }
     const handlePrevious = () => {
       if (previousPage) {
         setCurrentPage(currentPage - 1);
-        fetchPosts(currentPage - 1);
+        fetchUserPatches(currentPage - 1);
       }
     }
 
     return (
         <main className="flex flex-col gap-y-8 px-8 md:px-[11.25%]">
-        <LoginModal show={showLoginModal} onClose={() => setShowLoginModal(!showLoginModal)}/>
         <div id="Content" className="flex flex-row gap-x-9">
           <div id="PatchesCol" className="flex flex-col gap-y-8 md:w-[70%]">
             <div id="Title" className="flex flex-col lg:flex-row gap-y-2">
                 <h1 className="boldheader3 text-text">Patch Database</h1>
-                {loggedIn &&
-                <div className="flex flex-row gap-x-4 lg:ml-auto">
-                  <Button variant="primary" text="New Patch" link="/patches/new" className="max-w-28"/>
-                  <Button variant="accent" text="Your Patches" link="/profile/me/patches" className="max-w-32"/>
-                </div>
-                }
-                {!loggedIn && 
-                <div className="flex flex-row gap-x-4 lg:ml-auto">
-                  <Button variant="primary" text="New Patch" className="max-w-28" onClick={() => setShowLoginModal(!showLoginModal)}/>
-                  <Button variant="accent" text="Your Patches" className="max-w-32" onClick={() => setShowLoginModal(!showLoginModal)}/>
-                </div>
-                }
             </div>
             <div className="flex flex-col gap-y-3">
                 <div className={`flex flex-row justify-center ${totalPages===1? "hidden" : "visible"}`}>
@@ -124,13 +110,9 @@ const Patches: React.FC = () => {
                   />
             </div>
           </div>
-          <aside id="AsideCol" className="hidden md:w-[28%] md:flex flex-col gap-y-8">
-            <AsideBox variant="register" />
-            <AsideBox variant="statistics" />
-          </aside>
         </div>
       </main>
     );
 }
 
-export default Patches;
+export default UserPatchesList;

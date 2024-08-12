@@ -1,9 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+type ButtonVariants = "primary" | "secondary" | "accent";
+type FillVariants = "solid" | "outline";
+
 interface ButtonProps {
-    variant?: "primary" | "secondary";
-    fill?: "solid" | "outline";
+    variant?: ButtonVariants;
+    fill?: FillVariants;
     text: string;
     onClick?: () => void;
     type?: "button" | "submit" | "reset";
@@ -13,12 +16,16 @@ interface ButtonProps {
 
 const ButtonStyles = {
     "primary": {
-        solid: "bg-clr_primary text-text_secondary",
-        outline: "border border-clr_primary border-2 text-text",
+        "solid": "bg-clr_primary text-text_secondary hover:opacity-70",
+        "outline": "border border-clr_primary border-2 text-text hover:opacity-70",
     },
     "secondary": {
-        solid: "bg-clr_secondary text-text_secondary",
-        outline: "border border-clr_secondary border-2 text-text",
+        "solid": "bg-clr_secondary text-text_secondary hover:opacity-70",
+        "outline": "border border-clr_secondary border-2 text-text hover:opacity-70",
+    },
+    "accent": {
+        "solid": "bg-clr_accent text-text_secondary hover:opacity-70",
+        "outline": "border border-clr_accent border-2 text-text hover:opacity-70",
     },
 };
 

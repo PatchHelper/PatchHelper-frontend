@@ -28,7 +28,7 @@ const ShareModal: React.FC<ShareModalProps> = (props: ShareModalProps) => {
                 <div id="ShareContent" className="w-full px-5 py-2">
                     <div id="ShareLink" className="flex flex-row gap-x-4 items-center">
                         <input type="text" className="bg-background w-full text-text p-2 rounded-md border-text border-2 border-dashed focus:border-clr_primary focus:border-solid outline-none" value={currentPath} readOnly/>
-                        <Button text="Copy" className="h-12" onClick={copyToClipboard}/>
+                        <Button text="Copy" variant="primary" className="h-12" onClick={copyToClipboard}/>
                     </div>
                     <p className={`right-[1.25rem] fixed text-clr_primary footertext ${showCopied? "visible" : "hidden"}`}>Copied to clipboard!</p>
                 </div>
