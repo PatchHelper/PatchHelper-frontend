@@ -1,13 +1,16 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useParams } from 'react-router-dom';
 
-import { PatchSortingOptionsType, Patch } from "../types";
+import { PatchSortingOptionsType, Patch, User } from "../types";
 import { PatchSortingOptions, PatchesPerPage } from "../constants";
 import { fetchUserPatches } from "../services/patchService";
+import { getUserDetails } from "../services/profileService";
 import { PatchOverview, PageController } from "../components";
+import { set } from "date-fns";
 
 const UserPatchesList: React.FC = () => {
     const id = useParams<{ id: string }>().id;
+    const [user, setUser] = useState<User>();
     const [posts, setPosts] = useState<Patch[]>([]);
     const [sort, setSort] = useState<string>("-created");
 
@@ -31,7 +34,13 @@ const UserPatchesList: React.FC = () => {
             console.error("No user id provided");
             return;
         }
+        const fetchUser = async () => {
+          const response = await getUserDetails(parseInt(id));
+          
+          if (response) {setUser(response.data)}
+        }
 
+        fetchUser();
         fetchPatches(1, parseInt(id), "-created");
     }, [id]);
 
@@ -68,7 +77,7 @@ const UserPatchesList: React.FC = () => {
         <div id="Content" className="flex flex-row gap-x-9">
           <div id="PatchesCol" className="flex flex-col gap-y-8 md:w-[70%]">
             <div id="Title" className="flex flex-col lg:flex-row gap-y-2">
-                <h1 className="boldheader3 text-text">Patch Database</h1>
+                <h1 className="boldheader3 text-text">{user?.username}'s Patches</h1>
             </div>
             <div className="flex flex-col gap-y-3">
                 <div className={`flex flex-row justify-center ${totalPages===1? "hidden" : "visible"}`}>
@@ -94,7 +103,7 @@ const UserPatchesList: React.FC = () => {
               <h2 className="semiboldheader2 text-clr_primary">Recent uploads</h2>
               <div className="flex flex-col gap-y-4">
                 {posts.map((patch, index) => (
-                  <PatchOverview key={index} title={patch.title} description={patch.description} creator={patch.user} created_at={patch.created} upvotes={patch.upvotes}/>
+                  <PatchOverview key={index} patch={patch}/>
                 ))}
               </div>
             </div>
@@ -110,7 +119,7 @@ const UserPatchesList: React.FC = () => {
                   />
             </div>
           </div>
-        </div>
+      </div>
       </main>
     );
 }

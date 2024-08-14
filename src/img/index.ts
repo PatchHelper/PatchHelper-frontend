@@ -17,6 +17,8 @@ import Report from "../img/report.svg";
 import Share from "../img/share.svg";
 import Previous from "../img/previous.svg";
 import Next from "../img/next.svg";
+import Trash from "../img/trash-fill.svg";
+import Edit from "../img/pencil-fill.svg";
 
 // Spacers
 import ImageSpacer1 from "../img/ImageSpacer1.svg";
@@ -40,5 +42,7 @@ export {
     Report,
     Share,
     Previous,
-    Next
+    Next,
+    Trash,
+    Edit
 };

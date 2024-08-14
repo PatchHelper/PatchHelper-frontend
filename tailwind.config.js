@@ -17,6 +17,7 @@ module.exports = {
       text_secondary: "var(--color-text-secondary)",
       background: "var(--color-background)",
       background2: "var(--color-background2)",
+      danger: "var(--color-danger)",
     },
     fontFamily: {
       poppins: ["Poppins", "sans-serif"],

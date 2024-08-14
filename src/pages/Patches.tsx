@@ -12,7 +12,6 @@ const Patches: React.FC = () => {
     const [showLoginModal, setShowLoginModal] = useState<boolean>(false);
 
     const loggedIn = isLoggedIn();
-    console.log(loggedIn);
 
     // Pagination
     const [currentPage, setCurrentPage] = useState<number>(1);
@@ -108,7 +107,7 @@ const Patches: React.FC = () => {
               <h2 className="semiboldheader2 text-clr_primary">Recent uploads</h2>
               <div className="flex flex-col gap-y-4">
                 {posts.map((patch, index) => (
-                  <PatchOverview key={index} title={patch.title} description={patch.description} creator={patch.user} created_at={patch.created} upvotes={patch.upvotes}/>
+                  <PatchOverview key={index} patch={patch}/>
                 ))}
               </div>
             </div>

@@ -18,15 +18,18 @@ const updateProfile = async (id: number | string, data: FormData) => {
     return response.data;
 };
 
-const getCurrentUser = async () => {
-    const response = await api.get(`/user/`);
+const getUserDetails = async (id?: number) => {
+    let url = '/user/';
+    if (id) { url += `?user_id=${id}` };
 
-    return response.data;
+    const response = await api.get(url);
+
+    return response;
 
 }
 
 export {
     getProfile,
     updateProfile,
-    getCurrentUser,
+    getUserDetails,
 };

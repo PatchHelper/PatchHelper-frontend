@@ -9,11 +9,11 @@ interface PatchContentSelectorProps {
     setPostContent: React.Dispatch<React.SetStateAction<patchContent[]>>;
 }
 
-const PatchContentSelector: React.FC<PatchContentSelectorProps> = ({postContent, setPostContent}) => {
+const PatchContentSelector: React.FC<PatchContentSelectorProps> = (props: PatchContentSelectorProps) => {
     let [visible, setVisible] = useState<boolean>(false);
     
     const handleAddingContent = (variant: PatchContentVariantsType) => {
-        setPostContent([...postContent, PatchContentElements[variant]]);
+        props.setPostContent([...props.postContent, PatchContentElements[variant]]);
         setVisible(false);
     }
     
@@ -25,7 +25,7 @@ const PatchContentSelector: React.FC<PatchContentSelectorProps> = ({postContent,
             </div>
             <div className={`${visible? 'visible' : 'hidden'} flex flex-wrap justify-center items-center gap-x-4`}>
             { PatchContentVariants.map((variant, index) => (
-                <div>
+                <div key={index}>
                     {/* Add the component thumbnail here*/}
                     <p onClick={() => handleAddingContent(variant)} className="text-text cursor-pointer hover:opacity-70">{variant}</p>
                 </div>

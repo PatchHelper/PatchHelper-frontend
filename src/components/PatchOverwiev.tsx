@@ -2,42 +2,45 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { format } from 'date-fns';
 
-import { PersonFill, Callendar, Upvote } from "../img";
+import { Button } from "../components";
+import { PersonFill, Callendar, Upvote, Trash, Edit } from "../img";
+import { Patch } from "../types";
 
 interface PatchOverviewProps {
-    title: string;
-    description: string;
-    creator: {
-        id: number;
-        username: string;
-    };
-    created_at: string;
-    upvotes: number;
+    patch: Patch;
+    editable?: boolean;
 }
 
 const PatchOverview: React.FC<PatchOverviewProps> = (props: PatchOverviewProps) => {
     return (
         <div className="flex flex-row gap-x-4 p-6 bg-background2">
-            {/* Add the post thumbnail here */}
-            <div className="flex flex-col gap-y-3">
-                <div className="flex flex-col align-middle"> 
-                    <Link to={`/patches/${props.title}`}className="semiboldheader2 text-text">{props.title}</Link>
+            {/* TODO: Add the post thumbnail here */}
+            <div className="flex flex-col gap-y-3 w-full">
+                <div className="flex flex-col align-middle">
+                    <div className="flex flex-row justify-between">
+                        <Link to={`/patches/${props.patch.title}`}className="semiboldheader2 text-text">{props.patch.title}</Link>
+                        <div className={`flex flex-row ${props.editable? "visible" : "hidden"} gap-x-2`}>
+                            {/* TODO: Add functionality */}
+                            { props.editable && <Button text="Edit" icon={Edit} variant="accent" fill="outline" className="max-h-10 max-w-15"/> }
+                            { props.editable && <Button text="Delete" icon={Trash} variant="danger" fill="solid" className="max-h-10 max-w-15"/> }
+                        </div>
+                    </div>
                     <div className="flex flex-row gap-x-4 text-clr_primary">
                         <div className="flex flex-row gap-x-2 items-center justify-center">
                             <img src={PersonFill} alt="Person icon" className="w-4 h-4"/>
-                            <Link to={`/profile/${props.creator.id}`}><p>{props.creator.username}</p></Link>
+                            <Link to={`/profile/${props.patch.user.id}`}><p>{props.patch.user.username}</p></Link>
                         </div>
                         <div className="flex flex-row gap-x-2 items-center justify-center">
                             <img src={Callendar} alt="Callendar icon" className="w-4 h-4"/>
-                            <p>{format(new Date(props.created_at), 'dd-MM-yyyy')}</p>
+                            <p>{format(new Date(props.patch.created), 'dd-MM-yyyy')}</p>
                         </div>
                         <div className="flex flex-row gap-x-1 items-center justify-center">
                             <img src={Upvote} alt="Upvote icon" className="w-4 h-4"/>
-                            <p>{props.upvotes} upvotes</p>
+                            <p>{props.patch.upvotes} upvotes</p>
                         </div>
                     </div>
                 </div>
-                <p className="basetext text-text">{props.description}</p>
+                <p className="basetext text-text">{props.patch.description}</p>
             </div>
         </div>
     );

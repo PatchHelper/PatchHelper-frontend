@@ -6,8 +6,8 @@ import { PatchContentEditor, PatchContentSelector } from "../components";
 
 import api from "../utils/api";
 import { PersonFill, Callendar } from "../img";
-import { patchContent, User } from "../types";
-import { getCurrentUser } from "../services/profileService";
+import { patchContent, User, Patch } from "../types";
+import { getUserDetails } from "../services/profileService";
 import { Button } from "../components";
 
 const PatchCreate: React.FC = () => {
@@ -20,10 +20,10 @@ const PatchCreate: React.FC = () => {
 
     useEffect(() => {
         const fetchUser = async () => {
-            const response = await getCurrentUser();
+            const response = await getUserDetails();
 
             if (response) {
-                setUser(response);
+                setUser(response.data);
             }
     };
         fetchUser();
@@ -40,15 +40,6 @@ const PatchCreate: React.FC = () => {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        // const formData = new FormData();
-        // console.log(formData);
-        // formData.append('title', title);
-        // formData.append('description', description);
-        // formData.append('version', version);
-        // formData.append('content', content);
-        // formData.append('created', created.toISOString());
-        // formData.append('updated', updated.toISOString());
-
         const patch = {
             title: title,
             version: version,
@@ -57,8 +48,6 @@ const PatchCreate: React.FC = () => {
             created: new Date().toISOString(),
             updated: new Date().toISOString(),
         }
-
-        console.log('Patch data', patch);
 
         const response = await api.post("/patches/new/", 
             patch,
@@ -69,8 +58,6 @@ const PatchCreate: React.FC = () => {
                 },
             }
         );
-
-        console.log("Patch sent to api", response);
 };
 
     return (

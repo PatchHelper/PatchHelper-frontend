@@ -1,13 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-type ButtonVariants = "primary" | "secondary" | "accent";
-type FillVariants = "solid" | "outline";
-
 interface ButtonProps {
     variant?: ButtonVariants;
     fill?: FillVariants;
     text: string;
+    icon?: string;
     onClick?: () => void;
     type?: "button" | "submit" | "reset";
     className?: string;
@@ -27,11 +25,19 @@ const ButtonStyles = {
         "solid": "bg-clr_accent text-text_secondary hover:opacity-70",
         "outline": "border border-clr_accent border-2 text-text hover:opacity-70",
     },
+    "danger": {
+        "solid": "bg-danger text-text_secondary hover:opacity-70",
+        "outline": "border border-danger border-2 text-text hover:opacity-70",
+    },
 };
 
-const Button: React.FC<ButtonProps> = ({variant="primary", fill="solid", text, onClick= () => {}, type="button", className="", link}) => {
+type ButtonVariants = keyof typeof ButtonStyles;
+type FillVariants = keyof typeof ButtonStyles["primary"];
+
+const Button: React.FC<ButtonProps> = ({variant="primary", fill="solid", text, onClick= () => {}, type="button", className="", link, icon}) => {
     return (
-        <button className={`${ButtonStyles[variant][fill]} flex flex-row justify-center items-center p-4 text-basetext rounded-2xl align-middle ${className}`} type={type} onClick={onClick}>
+        <button className={`${ButtonStyles[variant][fill]} flex flex-row gap-x-1 justify-center items-center align-middle p-4 text-basetext rounded-2xl ${className}`} type={type} onClick={onClick}>
+            {icon? <img src={icon} alt="Button icon" className="w-4 h-4"/>: null}
             {link? <Link to={link}>{text}</Link>: text}
         </button>
     );
