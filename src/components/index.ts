@@ -8,6 +8,8 @@ import InfoCard from "./InfoCard";
 import Instructions from "./Instructions";
 import Footer from "./Footer";
 
+import Login from "./Login";
+
 import Button from "./Button";
 import AsideBox from "./AsideBox";
 import PageController from "./PageController";
@@ -22,6 +24,7 @@ import PatchContentSelector from "./PatchContentSelector";
 // Modals
 import ShareModal from "./modals/Share";
 import LoginModal from "./modals/Login";
+import CustomModal from "./modals/CustomModal";
 
 export { 
     SimpleNavbar, 
@@ -43,5 +46,7 @@ export {
     Button,
     PageController,
     ShareModal,
-    LoginModal
+    LoginModal,
+    CustomModal,
+    Login
 };

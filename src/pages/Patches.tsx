@@ -4,7 +4,7 @@ import { Patch, PatchSortingOptionsType } from "../types";
 import { PatchesPerPage, PatchSortingOptions } from "../constants";
 import { fetchPatches } from "../services/patchService";
 import { isLoggedIn } from "../utils/auth"; 
-import { PatchOverview, AsideBox, Button, PageController, LoginModal } from "../components";
+import { PatchOverview, AsideBox, Button, PageController, Login, CustomModal } from "../components";
 
 const Patches: React.FC = () => {
     const [posts, setPosts] = useState<Patch[]>([]);
@@ -67,7 +67,8 @@ const Patches: React.FC = () => {
 
     return (
         <main className="flex flex-col gap-y-8 px-8 md:px-[11.25%]">
-        <LoginModal show={showLoginModal} onClose={() => setShowLoginModal(!showLoginModal)}/>
+        <CustomModal show={showLoginModal} onClose={() => setShowLoginModal(!showLoginModal)} title="Login"><Login/></CustomModal>
+        {/* <LoginModal show={showLoginModal} onClose={() => setShowLoginModal(!showLoginModal)}/> */}
         <div id="Content" className="flex flex-row gap-x-9">
           <div id="PatchesCol" className="flex flex-col gap-y-8 md:w-[70%]">
             <div id="Title" className="flex flex-col lg:flex-row gap-y-2">

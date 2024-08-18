@@ -8,7 +8,7 @@ import LandingPage from './pages/LandingPage';
 import MainApp from './pages/MainApp';
 import PatchDetail from './pages/PatchDetail';
 import Register from './pages/Register';
-import Login from './pages/Login';
+import Login from './components/Login';
 import Logout from './pages/Logout';
 import ProfileView from './pages/ProfileView';
 import ProfileEdit from './pages/ProfileEdit';
