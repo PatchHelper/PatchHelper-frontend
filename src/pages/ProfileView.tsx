@@ -39,7 +39,7 @@ const ProfileView: React.FC = () => {
                         <div className="flex flex-col gap-y-2 items-center text-base text-text">
                             {avatarPreview && <img src={avatarPreview} alt="User avatar" className="w-32 h-32"/>}
                             <div className="flex flex-row gap-x-2">
-                                <img src={Callendar} alt="Callendar icon" />
+                                <Callendar className="w-4 h-4"/>
                                 <p className="text-base text-text opacity-70">{format(new Date(profile.joined).toLocaleDateString(), 'dd-MM-yyyy')}</p>
                             </div>
                         </div>

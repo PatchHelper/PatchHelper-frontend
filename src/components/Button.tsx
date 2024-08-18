@@ -5,11 +5,11 @@ interface ButtonProps {
     variant?: ButtonVariants;
     fill?: FillVariants;
     text: string;
-    icon?: string;
     onClick?: () => void;
     type?: "button" | "submit" | "reset";
     className?: string;
     link?: string;
+    children?: React.ReactNode;
 }
 
 const ButtonStyles = {
@@ -34,10 +34,10 @@ const ButtonStyles = {
 type ButtonVariants = keyof typeof ButtonStyles;
 type FillVariants = keyof typeof ButtonStyles["primary"];
 
-const Button: React.FC<ButtonProps> = ({variant="primary", fill="solid", text, onClick= () => {}, type="button", className="", link, icon}) => {
+const Button: React.FC<ButtonProps> = ({variant="primary", fill="solid", text, onClick= () => {}, type="button", className="", link, children}) => {
     return (
         <button className={`${ButtonStyles[variant][fill]} flex flex-row gap-x-1 justify-center items-center align-middle p-4 text-basetext rounded-2xl ${className}`} type={type} onClick={onClick}>
-            {icon? <img src={icon} alt="Button icon" className="w-4 h-4"/>: null}
+            {children? children: null}
             {link? <Link to={link}>{text}</Link>: text}
         </button>
     );

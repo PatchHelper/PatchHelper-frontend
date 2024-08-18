@@ -1,8 +1,12 @@
 const path = require('path');
 const BundleTracker = require('webpack-bundle-tracker');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 
-module.exports = {
+module.exports = () => {
+  const dotenvFilename = '.env';
+
+  return {
   mode: 'development', // or 'development'
   entry: './src/index.tsx',
   output: {
@@ -16,6 +20,9 @@ module.exports = {
         inject: 'body',
         scriptLoading: 'defer'
       }),
+    new Dotenv({
+      path: dotenvFilename,
+    }),
   ],
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.json']
@@ -46,4 +53,4 @@ module.exports = {
     }      
     ],
   }
-};
+}};

@@ -13,6 +13,7 @@ const UserPatchesList: React.FC = () => {
     const [user, setUser] = useState<User>();
     const [posts, setPosts] = useState<Patch[]>([]);
     const [sort, setSort] = useState<string>("-created");
+    const [sortTitle, setSortTitle] = useState<PatchSortingOptionsType>("New");
 
     // Pagination
     const [currentPage, setCurrentPage] = useState<number>(1);
@@ -52,7 +53,8 @@ const UserPatchesList: React.FC = () => {
 
         const sorting = PatchSortingOptions[sort];
 
-        setSort(sorting);
+        setSort(sorting)
+        setSortTitle(sort);
         fetchUserPatches(currentPage, parseInt(id), sorting);
     }
     const onPageChange = (page: number) => {
@@ -100,7 +102,7 @@ const UserPatchesList: React.FC = () => {
                 </div>
             </div>
             <div id="LatestUploads" className="flex flex-col gap-y-6">
-              <h2 className="semiboldheader2 text-clr_primary">Recent uploads</h2>
+              <h2 className="semiboldheader2 text-clr_primary">{sortTitle} uploads</h2>
               <div className="flex flex-col gap-y-4">
                 {posts.map((patch, index) => (
                   <PatchOverview key={index} patch={patch}/>

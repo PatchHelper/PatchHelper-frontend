@@ -20,7 +20,7 @@ const PatchContentSelector: React.FC<PatchContentSelectorProps> = (props: PatchC
     return (
         <div className="flex flex-col items-center p-4 bg-background2 rounded-lg border-dashed border-2 border-text">
             <div className={`${visible? 'hidden' : 'visible'} flex flex-col items-center gap-y-1 cursor-pointer hover:opacity-70`} onClick={() => setVisible(true)}>
-                <img src={Plus} alt="plus symbol icon" className="w-12 h-12"/>
+                <Plus className="w-12 h-12"/>
                 <p className="text-text">Add Content</p>
             </div>
             <div className={`${visible? 'visible' : 'hidden'} flex flex-wrap justify-center items-center gap-x-4`}>

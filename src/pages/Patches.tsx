@@ -9,6 +9,7 @@ import { PatchOverview, AsideBox, Button, PageController, LoginModal } from "../
 const Patches: React.FC = () => {
     const [posts, setPosts] = useState<Patch[]>([]);
     const [sort, setSort] = useState<string>("-created");
+    const [sortTitle, setSortTitle] = useState<PatchSortingOptionsType>("New");
     const [showLoginModal, setShowLoginModal] = useState<boolean>(false);
 
     const loggedIn = isLoggedIn();
@@ -44,6 +45,7 @@ const Patches: React.FC = () => {
         const sorting = PatchSortingOptions[sort];
 
         setSort(sorting);
+        setSortTitle(sort);
         fetchPosts(currentPage, sorting);
     }
     const onPageChange = (page: number) => {
@@ -104,7 +106,7 @@ const Patches: React.FC = () => {
                 </div>
             </div>
             <div id="LatestUploads" className="flex flex-col gap-y-6">
-              <h2 className="semiboldheader2 text-clr_primary">Recent uploads</h2>
+              <h2 className="semiboldheader2 text-clr_primary">{sortTitle} uploads</h2>
               <div className="flex flex-col gap-y-4">
                 {posts.map((patch, index) => (
                   <PatchOverview key={index} patch={patch}/>

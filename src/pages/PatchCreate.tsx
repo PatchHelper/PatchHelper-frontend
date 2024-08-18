@@ -72,11 +72,11 @@ const PatchCreate: React.FC = () => {
                         </div>
                         <div className="flex flex-col md:flex-row text-text gap-x-3 gap-y-3">
                             <div className="flex flex-row gap-x-1 items-center justify-center">
-                                <img src={PersonFill} alt="Person icon" className="w-4 h-4"/>
+                                <PersonFill className="w-4 h-4"/>
                                 <Link to={`/profile/${user.id}`}><p className="text-text cursor-pointer hover:opacity-70">{user.username}</p></Link>
                             </div>
                             <div className="flex flex-row gap-x-1 items-center justify-center">
-                                <img src={Callendar} alt="Callendar icon" className="w-4 h-4"/>
+                                <Callendar className="w-4 h-4"/>
                                 <p>{format(created, 'dd-MM-yyyy')}</p>
                             </div>
                             {/* TODO: Add download stat */}

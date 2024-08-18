@@ -1,24 +1,25 @@
 // Landing Page
-import HeroCard from "../img/HeroCard.svg";
-import AboutImage from "../img/tu bedzie fajne zdjecie czy cos.png"
-import InstructionImage from "../img/tu bedzie fajne zdjecie czy cos2.png"
+import { ReactComponent as HeroCard } from "../img/HeroCard.svg";
+import AboutImage from "../img/tu bedzie fajne zdjecie czy cos.png";
+import InstructionImage from "../img/tu bedzie fajne zdjecie czy cos2.png";
 
 // Icons
-import ArrowDown from "../img/ArrowDown.svg";
 import Menu from "../img/menu.svg";
 import CloseMenu from "../img/close.svg";
-import SearchIcon from "../img/search.svg";
-import PersonFill from "../img/person-fill.svg";
-import PersonFillCircle from "../img/person-circle.svg";
-import Plus from "../img/plus-lg.svg";
-import Callendar from "../img/calendar.svg";
-import Upvote from "../img/upvote.svg";
-import Report from "../img/report.svg";
-import Share from "../img/share.svg";
-import Previous from "../img/previous.svg";
-import Next from "../img/next.svg";
-import Trash from "../img/trash-fill.svg";
-import Edit from "../img/pencil-fill.svg";
+import { ReactComponent as ArrowDown } from "../img/ArrowDown.svg";
+import { ReactComponent as SearchIcon } from "../img/search.svg";
+import { ReactComponent as PersonFill } from "../img/person-fill.svg";
+import { ReactComponent as PersonFillCircle } from "../img/person-circle.svg";
+import { ReactComponent as Plus } from "../img/plus-lg.svg";
+import { ReactComponent as Callendar } from "../img/calendar.svg";
+import { ReactComponent as Upvote } from "../img/upvote.svg";
+import { ReactComponent as Report } from "../img/report.svg";
+import { ReactComponent as Share } from "../img/share.svg";
+import { ReactComponent as Previous } from "../img/previous.svg";
+import { ReactComponent as Next } from "../img/next.svg";
+import { ReactComponent as Trash } from "../img/trash-fill.svg";
+import { ReactComponent as Edit } from "../img/pencil-fill.svg";
+
 
 // Spacers
 import ImageSpacer1 from "../img/ImageSpacer1.svg";

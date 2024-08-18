@@ -21,7 +21,7 @@ const PageController: React.FC<PageControllerProps> = ({totalPages, currentPage,
     
     return (
         <div className="flex flex-row gap-x-3">
-            <img src={Previous} alt="Previous Icon" className={`w-6 h-6 ${hasPrevious? "opacity-100 cursor-pointer" : "opacity-70 cursor-default"}`} onClick={hasPrevious? onPrevious : () => null}/>
+            <Previous className={`w-6 h-6 ${hasPrevious? "opacity-100 cursor-pointer" : "opacity-70 cursor-default"}`} onClick={hasPrevious? onPrevious : () => null}/>
             <div className="flex flex-row gap-x-2">
                 {Array.from({length: totalPages}, (_, i) => i+1).map((value, index) => (
                     <p 
@@ -33,7 +33,7 @@ const PageController: React.FC<PageControllerProps> = ({totalPages, currentPage,
                     </p>
                 ))}
             </div>
-            <img src={Next} alt="Next Icon" className={`w-6 h-6 ${hasNext? "opacity-100 cursor-pointer" : "opacity-70 cursor-default"}`} onClick={hasNext? onNext : () => null}/>
+            <Next className={`w-6 h-6 ${hasNext? "opacity-100 cursor-pointer" : "opacity-70 cursor-default"}`} onClick={hasNext? onNext : () => null}/>
         </div>
     );
 }

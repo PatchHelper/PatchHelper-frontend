@@ -97,15 +97,15 @@ const PatchDetail: React.FC = () => {
                     </div>
                     <div className="flex flex-col md:flex-row text-text gap-x-3 gap-y-3">
                         <div className="flex flex-row gap-x-1 items-center justify-center">
-                            <img src={PersonFill} alt="Person icon" className="w-4 h-4"/>
+                            <PersonFill className="w-4 h-4"/>
                             <Link to={`/profile/${patch.user.id}`}><p>{patch.user.username}</p></Link>
                         </div>
                         <div className="flex flex-row gap-x-1 items-center justify-center">
-                            <img src={Callendar} alt="Callendar icon" className="w-4 h-4"/>
+                            <Callendar className="w-4 h-4"/>
                             <p>{format(new Date(patch.created), 'dd-MM-yyyy')}</p>
                         </div>
                         <div className="flex flex-row gap-x-1 items-center justify-center">
-                            <img src={Upvote} alt="Upvote icon" className="w-4 h-4"/>
+                            <Upvote className="w-4 h-4"/>
                             <p>{patch.upvotes} upvotes</p>
                         </div>
                         {/* TODO: Add download stat */}
@@ -136,15 +136,15 @@ const PatchDetail: React.FC = () => {
             <div id="Controlls" className="flex flex-row justify-center md:justify-end gap-x-4 p-4 bg-background2 select-none">
                 <div id="ShareButton" className="flex flex-row gap-x-2 items-center align-middle cursor-pointer hover:border-2 hover:border-clr_primary box-border border-2 border-background2" onClick={() => setShowShareModal(!showShareModal)}>
                     <p className="basetext text-text">Share</p>
-                    <img src={Share} alt="Share icon" className="w-6 h-6"/>
+                    <Share className="w-6 h-6"/>
                 </div>
                 <div id="UpvoteButton" className="flex flex-row gap-x-2 items-center align-middle cursor-pointer hover:border-2 hover:border-clr_primary box-border border-2 border-background2" onClick={upvotePatch}>
                     <p className="basetext text-text">Upvote</p>
-                    <img src={Upvote} alt="Upvote icon" className="w-6 h-6"/>
+                    <Upvote className="w-6 h-6"/>
                 </div>
                 <div id="ReportButton" className="flex flex-row gap-x-2 items-center align-middle cursor-pointer hover:border-2 hover:border-clr_primary box-border border-2 border-background2">
                     <p className="basetext text-text">Report</p>
-                    <img src={Report} alt="Report icon" className="w-6 h-6"/>
+                    <Report className="w-6 h-6 fill-clr_primary"/>
                 </div>
             </div>
         </main>

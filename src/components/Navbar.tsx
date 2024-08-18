@@ -25,7 +25,7 @@ const Navbar: React.FC = () => {
                         onClick={() => setToggle(false)}
                         >
                             <Link to={`/${link.id}`}>
-                                {link.label==="Search"? <img src={SearchIcon} alt="SearchIcon"/> : link.label}
+                                {link.label==="Search"? <SearchIcon /> : link.label}
                             </Link>
                         </li>
                     ))}

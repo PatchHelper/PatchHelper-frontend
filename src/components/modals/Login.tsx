@@ -45,7 +45,7 @@ const LoginModal: React.FC<LoginModalProps> = (props: LoginModalProps) => {
                 </div>
                 <div id="LoginContent" className="flex flex-col px-8 md:px-[11.25%] items-center my-auto w-full">
                     <div className="flex flex-col max-w-[320px] gap-y-6 rounded-2xl p-8 bg-background2 justify-center items-center">
-                        <img src={PersonFillCircle} alt="PersonFillCircle icon" className="w-12 h-12"/>
+                        <PersonFillCircle className="w-12 h-12"/>
                         <form className="flex flex-col gap-y-3" onSubmit={handleSubmit}>
                             <div className="flex flex-col justify-start gap-y-1">
                                 <label htmlFor="username" className="text-text text-textbase">Username</label>
