@@ -9,19 +9,19 @@ import { Patch, patchContent } from "../types";
 import { PersonFill, Callendar, Share, Upvote, Report } from "../img";
 
 const PatchDetail: React.FC = () => {
-    const { title } = useParams<{ title: string}>();
+    const { uuid } = useParams<{ uuid: string}>();
     const [patch, setPatch] = useState<Patch | null>(null);
     const [patchContents, setPatchContents] = useState<patchContent[]>([]);
     const [showShareModal, setShowShareModal] = useState<boolean>(false);
     const [showLoginModal, setShowLoginModal] = useState<boolean>(false);
 
     useEffect(() => {
-        if (!title) {
+        if (!uuid) {
             console.error("No title provided in URL");
             return;
         }
         const fetchPatchData = async () => {
-            const patch_response = await fetchPatch(title);
+            const patch_response = await fetchPatch(uuid);
 
             if (patch_response.status !== 200) {
                 console.error("Error fetching patch data");
@@ -29,7 +29,7 @@ const PatchDetail: React.FC = () => {
             }
             setPatch(patch_response.data);
 
-            const content_response = await fetchPatchContent(title);
+            const content_response = await fetchPatchContent(uuid);
             
             if (content_response.status !== 200) {
                 console.error("Error fetching patch data");
@@ -42,12 +42,12 @@ const PatchDetail: React.FC = () => {
         
         fetchPatchData();
 
-    }, [title]);
+    }, [uuid]);
 
     const upvotePatch = async () => {
         if (patch) {
             try {
-                const response = await handleUpvote(patch.id);
+                const response = await handleUpvote(patch.uuid);
                 console.log(response);
 
                 const upvotes = response.data.upvotes;
@@ -92,7 +92,7 @@ const PatchDetail: React.FC = () => {
                 {/* TODO: Add an thumbnail component here */}
                 <div id="PatchInfo" className="flex flex-col gap-y-3">
                     <div className="flex flex-wrap gap-x-2 gap-y-2">
-                        <h2 className="semiboldheader3 md:semiboldheader2 text-text">{title}</h2>
+                        <h2 className="semiboldheader3 md:semiboldheader2 text-text">{patch.title}</h2>
                         <h2 className="semiboldheader3 md:semiboldheader2 text-text opacity-70">0.0.0 </h2> {/* TODO: Add version to patch model */}
                     </div>
                     <div className="flex flex-col md:flex-row text-text gap-x-3 gap-y-3">

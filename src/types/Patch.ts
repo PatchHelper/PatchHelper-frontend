@@ -1,6 +1,7 @@
 import { PatchContentElements, PatchSortingOptions } from "../constants";
 
 export type PatchContentVariantsType = keyof typeof PatchContentElements;
+export type PatchStates = "Draft" | "Published" | "Hidden";
 
 export interface patchContent {
     type: PatchContentVariantsType;
@@ -14,6 +15,7 @@ export interface PatchContentElementsType {
 }
 
 export interface Patch {
+    uuid: string;
     id: number;
     title: string;
     description: string;
@@ -25,6 +27,7 @@ export interface Patch {
         username: string;
     };
     upvotes: number;
+    state: PatchStates;
 };
 
 export type PatchSortingOptionsType = keyof typeof PatchSortingOptions;

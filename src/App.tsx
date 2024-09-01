@@ -45,11 +45,11 @@ const AnimatedTransition: React.FC = () => {
                 <Route path="/" Component={LandingPage}/>
                 <Route path="/patches" Component={MainApp}/>
                 <Route path="/patches/new" Component={PatchCreate}/>
-                <Route path="/patches/:title" Component={PatchDetail}/>
+                <Route path="/patches/:uuid" Component={PatchDetail}/>
                 <Route path="/files" Component={Patches}/>
 
                 <Route path="/register" Component={Register}/>
-                <Route path="/login" Component={Login}/>
+                <Route path="/login" element={ <Login nextPage='/patches'/> }/>
                 <Route path="/logout" Component={Logout}/>
                 <Route path="/profile/me" Component={ProfileEdit}/>
                 <Route path="/profile/:id" Component={ProfileView}/>

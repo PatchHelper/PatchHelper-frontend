@@ -5,7 +5,11 @@ import axios from "axios";
 import { PersonFillCircle } from "../img";
 import { Button } from "../components";
 
-const Login: React.FC = () => {
+interface LoginProps {
+    nextPage?: string;
+}
+
+const Login: React.FC<LoginProps> = (props: LoginProps) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState<string | null>(null);
@@ -23,7 +27,14 @@ const Login: React.FC = () => {
             localStorage.setItem("access_token", response.data.access);
             localStorage.setItem("refresh_token", response.data.refresh);
             console.log("User logged in:", response.data);
-            navigate(currentPath);
+
+            if (props.nextPage) {
+                navigate(props.nextPage);
+            }
+            else {
+                navigate(currentPath);
+            }
+
             window.location.reload();
 
         } catch (error) {

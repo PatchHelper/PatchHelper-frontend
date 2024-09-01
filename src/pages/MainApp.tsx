@@ -30,7 +30,7 @@ const MainApp: React.FC = () => {
             <h2 className="semiboldheader2 text-clr_primary">Recent uploads</h2>
             <div className="flex flex-col gap-y-4">
               {posts.map((patch, index) => (
-                <PatchOverview key={patch.id} patch={patch}/>
+                <PatchOverview key={index} patch={patch}/>
               ))}
             </div>
           </div>

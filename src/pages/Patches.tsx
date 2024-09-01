@@ -10,7 +10,10 @@ const Patches: React.FC = () => {
     const [posts, setPosts] = useState<Patch[]>([]);
     const [sort, setSort] = useState<string>("-created");
     const [sortTitle, setSortTitle] = useState<PatchSortingOptionsType>("New");
+
+    // Modal State
     const [showLoginModal, setShowLoginModal] = useState<boolean>(false);
+    const [AfterLogin, setAfterLogin] = useState<string>("./patches");
 
     const loggedIn = isLoggedIn();
 
@@ -67,7 +70,9 @@ const Patches: React.FC = () => {
 
     return (
         <main className="flex flex-col gap-y-8 px-8 md:px-[11.25%]">
-        <CustomModal show={showLoginModal} onClose={() => setShowLoginModal(!showLoginModal)} title="Login"><Login/></CustomModal>
+        <CustomModal show={showLoginModal} onClose={() => setShowLoginModal(!showLoginModal)} title="Login">
+          <Login nextPage={AfterLogin} />
+        </CustomModal>
         {/* <LoginModal show={showLoginModal} onClose={() => setShowLoginModal(!showLoginModal)}/> */}
         <div id="Content" className="flex flex-row gap-x-9">
           <div id="PatchesCol" className="flex flex-col gap-y-8 md:w-[70%]">
@@ -81,8 +86,8 @@ const Patches: React.FC = () => {
                 }
                 {!loggedIn && 
                 <div className="flex flex-row gap-x-4 lg:ml-auto">
-                  <Button variant="primary" text="New Patch" className="max-w-28" onClick={() => setShowLoginModal(!showLoginModal)}/>
-                  <Button variant="accent" text="Your Patches" className="max-w-32" onClick={() => setShowLoginModal(!showLoginModal)}/>
+                  <Button variant="primary" text="New Patch" className="max-w-28" onClick={() => {setShowLoginModal(!showLoginModal); setAfterLogin("/patches/new")}}/>
+                  <Button variant="accent" text="Your Patches" className="max-w-32" onClick={() => {setShowLoginModal(!showLoginModal); setAfterLogin("/profile/me/patches")}}/>
                 </div>
                 }
             </div>

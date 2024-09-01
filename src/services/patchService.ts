@@ -25,22 +25,22 @@ const fetchUserPatches = async (page: number, user_id?: number, sort?: string) =
     return response;
 };
 
-const fetchPatch = async (title: string) => {
-    const url = `/patches/${title}`;
+const fetchPatch = async (uuid: string) => {
+    const url = `/patches/${uuid}`;
     const response = await api.get(url);
 
     return response;
 };
 
-const fetchPatchContent = async (title: string) => {
-    const url = `/patches/${title}/content`;
+const fetchPatchContent = async (uuid: string) => {
+    const url = `/patches/${uuid}/content`;
     const response = await api.get(url);
 
     return response;
 }
 
-const handleUpvote = async (id: number) => {
-    const response = await api.post(`/patches/${id}/upvote/`);
+const handleUpvote = async (uuid: string) => {
+    const response = await api.post(`/patches/${uuid}/upvote/`);
     return response;
 }
 

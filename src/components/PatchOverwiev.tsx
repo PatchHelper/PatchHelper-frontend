@@ -18,7 +18,7 @@ const PatchOverview: React.FC<PatchOverviewProps> = (props: PatchOverviewProps) 
             <div className="flex flex-col gap-y-3 w-full">
                 <div className="flex flex-col align-middle">
                     <div className="flex flex-row justify-between">
-                        <Link to={`/patches/${props.patch.title}`}className="semiboldheader2 text-text">{props.patch.title}</Link>
+                        <Link to={`/patches/${props.patch.uuid}`}className="semiboldheader2 text-text">{props.patch.title}</Link>
                         <div className={`flex flex-row ${props.editable? "visible" : "hidden"} gap-x-2`}>
                             {/* TODO: Add functionality */}
                             { props.editable && <Button text="Edit" variant="accent" fill="outline" className="max-h-10 max-w-15"><Edit className="w-4 h-4"/></Button> }
