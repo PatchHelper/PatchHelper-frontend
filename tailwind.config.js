@@ -8,7 +8,7 @@ module.exports = {
     "./node_modules/tw-elements-react/js/**/*.js",
   ],
   theme: {
-    darkMode: "class",
+    darkMode: ["class"],
     colors: {
       clr_primary: "var(--color-primary)",
       clr_secondary: "var(--color-secondary)",
@@ -18,6 +18,7 @@ module.exports = {
       background: "var(--color-background)",
       background2: "var(--color-background2)",
       danger: "var(--color-danger)",
+      transparent: 'transparent',
     },
     fontFamily: {
       poppins: ["Poppins", "sans-serif"],
@@ -62,5 +63,5 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [require("tailwindcss-animate")],
 }

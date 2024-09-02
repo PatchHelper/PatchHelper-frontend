@@ -89,7 +89,7 @@ const PatchDetail: React.FC = () => {
             <ShareModal show={showShareModal} onClose={() => setShowShareModal(!showShareModal)}/>
             <LoginModal show={showLoginModal} onClose={() => setShowLoginModal(!showLoginModal)}/>
             <div id="TitleBar" className="flex flex-row gap-x-8">
-                {/* TODO: Add an thumbnail component here */}
+                {patch.thumbnail && <img src={patch.thumbnail} alt="Patch thumbnail" className="w-32 h-32"/>}
                 <div id="PatchInfo" className="flex flex-col gap-y-3">
                     <div className="flex flex-wrap gap-x-2 gap-y-2">
                         <h2 className="semiboldheader3 md:semiboldheader2 text-text">{patch.title}</h2>

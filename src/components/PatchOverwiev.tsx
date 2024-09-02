@@ -14,7 +14,7 @@ interface PatchOverviewProps {
 const PatchOverview: React.FC<PatchOverviewProps> = (props: PatchOverviewProps) => {
     return (
         <div className="flex flex-row gap-x-4 p-6 bg-background2">
-            {/* TODO: Add the post thumbnail here */}
+            {props.patch.thumbnail && <img src={props.patch.thumbnail} alt="Patch thumbnail" className="w-32 h-32"/>}
             <div className="flex flex-col gap-y-3 w-full">
                 <div className="flex flex-col align-middle">
                     <div className="flex flex-row justify-between">

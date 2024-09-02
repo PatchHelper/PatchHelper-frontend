@@ -16,14 +16,14 @@ type profile = {
 const ProfileView: React.FC = () => {
     const { id } = useParams<{ id: string }>();
     const [profile, setProfile] = useState<profile | null>(null);
-    const [avatarPreview, setAvatarPreview] = useState<string | null>(null);
+    const [avatar, setAvatar] = useState<string | null>(null);
     const [bio, setBio] = useState<string>('');
 
     useEffect(() => {
         const fetchProfile = async () => {
             const response = await getProfile(id);
             setProfile(response);
-            setAvatarPreview(response.avatar);
+            setAvatar(response.avatar);
             setBio(response.bio);
         };
         fetchProfile();
@@ -37,7 +37,7 @@ const ProfileView: React.FC = () => {
                 <div className="flex flex-col gap-x-8 gap-y-6">
                     <div className="flex flex-col md:flex-row gap-y-4">
                         <div className="flex flex-col gap-y-2 items-center text-base text-text">
-                            {avatarPreview && <img src={avatarPreview} alt="User avatar" className="w-32 h-32"/>}
+                            {avatar && <img src={avatar} alt="User avatar" className="w-32 h-32"/>}
                             <div className="flex flex-row gap-x-2">
                                 <Callendar className="w-4 h-4"/>
                                 <p className="text-base text-text opacity-70">{format(new Date(profile.joined).toLocaleDateString(), 'dd-MM-yyyy')}</p>

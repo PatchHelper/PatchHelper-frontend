@@ -5,14 +5,16 @@ import { format } from "date-fns";
 import { PatchContentEditor, PatchContentSelector } from "../components";
 
 import api from "../utils/api";
-import { PersonFill, Callendar } from "../img";
-import { patchContent, User, Patch } from "../types";
+import { PersonFill, Callendar, Placeholder } from "../img";
+import { patchContent, User } from "../types";
 import { getUserDetails } from "../services/profileService";
 import { Button } from "../components";
 
 const PatchCreate: React.FC = () => {
     const [user, setUser] = useState<User>();
     const [title, setTitle] = useState<string>("Patch Title");
+    const [thumbnail, setThumbnail] = useState<File | null>(null);
+    const [thumbnailPreview, setThumbnailPreview] = useState<string | null>(null)
     const [description, setDescription] = useState<string>("Enter the patch description here");
     const [version, setVersion] = useState<string>("1.0.0");
     const [content, setContent] = useState<patchContent[]>([]);
@@ -40,31 +42,47 @@ const PatchCreate: React.FC = () => {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        const patch = {
-            title: title,
-            version: version,
-            description: description,
-            content: content,
-            created: new Date().toISOString(),
-            updated: new Date().toISOString(),
-        }
+        const formData = new FormData();
+        formData.append('title', title);
+        formData.append('thumbnail', thumbnail as Blob);
+        formData.append('version', version);
+        formData.append('description', description);
+        formData.append('content', JSON.stringify(content));
+        formData.append('created', new Date().toISOString());
+        formData.append('updated', new Date().toISOString());
 
         const response = await api.post("/patches/new/", 
-            patch,
+            formData,
             {
                 headers: {
                     'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
-                    'Content-Type': 'application/json',
+                    'Content-Type': 'multipart/form-data',
                 },
             }
         );
-};
+    };
+
+    const handleThumbnailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const file = event.target.files?.[0]
+        if (file) {
+            setThumbnail(file);
+            setThumbnailPreview(URL.createObjectURL(file));
+        }
+    };
 
     return (
         <main>
             <form className="flex flex-col gap-y-8 px-8 md:px-[11.25%]" onSubmit={handleSubmit}>
                 <div id="TitleBar" className="flex flex-row gap-x-8">
-                    {/* TODO: Add an thumbnail component here */}
+                    <div className="flex flex-col gap-y-2 items-center">
+                        {!thumbnailPreview && <Placeholder className="w-32 h-32"/>}
+                        {thumbnailPreview && <img src={thumbnailPreview} alt="User avatar" className="w-32 h-32"/>}
+                        
+                        <div className="flex flex-col gap-y-1">
+                        <label htmlFor="thumbnail" className="text-clr_primary text-textbase">Thumbnail</label>
+                        <input type="file" id="thumbnail" className="max-w-56 bg-background2 border-2 border-dashed border-text hover:border-clr_primary rounded-lg p-2 text-text file:mr-1 file:border-0 file:bg-transparent file:text-text file:opactity-70"  onChange={handleThumbnailChange}/>
+                        </div>
+                    </div>
                     <div id="PatchInfo" className="flex flex-col gap-y-3">
                         <div className="flex flex-wrap gap-x-2 gap-y-2">
                             <input className="semiboldheader3 md:semiboldheader2 text-clr_primary bg-background border-2 border-dashed border-text rounded-lg p-2" value={title} onChange={(e) => setTitle(e.target.value)} />

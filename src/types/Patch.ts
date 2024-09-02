@@ -16,8 +16,8 @@ export interface PatchContentElementsType {
 
 export interface Patch {
     uuid: string;
-    id: number;
     title: string;
+    thumbnail: string;
     description: string;
     content: patchContent[];
     created: string;

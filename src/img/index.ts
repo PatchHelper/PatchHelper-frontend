@@ -19,6 +19,7 @@ import { ReactComponent as Previous } from "../img/previous.svg";
 import { ReactComponent as Next } from "../img/next.svg";
 import { ReactComponent as Trash } from "../img/trash-fill.svg";
 import { ReactComponent as Edit } from "../img/pencil-fill.svg";
+import { ReactComponent as Placeholder } from "../img/placeholder.svg";
 
 
 // Spacers
@@ -45,5 +46,6 @@ export {
     Previous,
     Next,
     Trash,
-    Edit
+    Edit,
+    Placeholder
 };
