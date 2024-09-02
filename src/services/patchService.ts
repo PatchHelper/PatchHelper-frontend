@@ -12,7 +12,7 @@ const fetchPatches = async (page: number, sort?: string) => {
     return response;
 };
 
-const fetchUserPatches = async (page: number, user_id?: number, sort?: string) => {
+const fetchUserPatches = async (page: number, user_id?: string, sort?: string) => {
     // if no sort is provided, default to sorting by creation date
     if (!sort) {
         sort = "-created";
@@ -31,6 +31,12 @@ const fetchPatch = async (uuid: string) => {
 
     return response;
 };
+const deletePatch = async (uuid: string) => {
+    const url = `/patches/${uuid}`;
+    const response = await api.delete(url);
+
+    return response;
+}
 
 const fetchPatchContent = async (uuid: string) => {
     const url = `/patches/${uuid}/content`;
@@ -48,6 +54,7 @@ export {
     fetchPatches,
     fetchUserPatches,
     fetchPatch,
+    deletePatch,
     fetchPatchContent,
-    handleUpvote
+    handleUpvote,
 };

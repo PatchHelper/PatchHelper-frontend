@@ -9,7 +9,7 @@ import { PatchOverview, PageController } from "../components";
 import { set } from "date-fns";
 
 const UserPatchesList: React.FC = () => {
-    const id = useParams<{ id: string }>().id;
+    const { userID="" } = useParams();
     const [user, setUser] = useState<User>();
     const [posts, setPosts] = useState<Patch[]>([]);
     const [sort, setSort] = useState<string>("-created");
@@ -21,7 +21,7 @@ const UserPatchesList: React.FC = () => {
     const [nextPage, setNextPage] = useState<string | null>(null);
     const [previousPage, setPreviousPage] = useState<string | null>(null);
 
-    const fetchPatches= async (page: number, id: number, sort?: string) => {
+    const fetchPatches= async (page: number, id: string, sort?: string) => {
         const response = await fetchUserPatches(page, id, sort);
   
         setPosts(response.data.results);
@@ -31,22 +31,22 @@ const UserPatchesList: React.FC = () => {
       };
 
     useEffect(() => {
-        if (!id) {
+        if (!userID) {
             console.error("No user id provided");
             return;
         }
         const fetchUser = async () => {
-          const response = await getUserDetails(parseInt(id));
+          const response = await getUserDetails(parseInt(userID));
           
           if (response) {setUser(response.data)}
         }
 
         fetchUser();
-        fetchPatches(1, parseInt(id), "-created");
-    }, [id]);
+        fetchPatches(1, userID, "-created");
+    }, [userID]);
 
     const changeSorting = (sort: PatchSortingOptionsType) => {
-        if (!id) {
+        if (!userID) {
             console.error("No user id provided");
             return;
         }
@@ -55,23 +55,29 @@ const UserPatchesList: React.FC = () => {
 
         setSort(sorting)
         setSortTitle(sort);
-        fetchUserPatches(currentPage, parseInt(id), sorting);
+        fetchPatches(currentPage, userID, sorting);
     }
     const onPageChange = (page: number) => {
       setCurrentPage(page);
-      fetchUserPatches(page);
+      fetchPatches(page, userID, sort);
     }
     const handleNext = () => {
       if (nextPage) {
         setCurrentPage(currentPage + 1);
-        fetchUserPatches(currentPage + 1);
+        fetchPatches(currentPage + 1, userID, sort);
       }
     }
     const handlePrevious = () => {
       if (previousPage) {
         setCurrentPage(currentPage - 1);
-        fetchUserPatches(currentPage - 1);
+        fetchPatches(currentPage - 1, userID, sort);
       }
+    }
+
+    if (!userID) {
+      return (
+        <p>Loading</p>
+      )
     }
 
     return (

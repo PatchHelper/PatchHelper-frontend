@@ -54,7 +54,7 @@ const AnimatedTransition: React.FC = () => {
                 <Route path="/profile/me" Component={ProfileEdit}/>
                 <Route path="/profile/:id" Component={ProfileView}/>
                 <Route path="/profile/me/patches" Component={UserPatchesEdit}/>
-                <Route path="/profile/:id/patches" Component={UserPatchesList}/>
+                <Route path="/profile/:userID/patches" Component={UserPatchesList}/>
             </Routes>
         </CSSTransition>
     </TransitionGroup>

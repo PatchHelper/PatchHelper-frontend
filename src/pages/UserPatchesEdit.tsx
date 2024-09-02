@@ -17,47 +17,53 @@ const UserPatchesEdit: React.FC = () => {
     const [nextPage, setNextPage] = useState<string | null>(null);
     const [previousPage, setPreviousPage] = useState<string | null>(null);
 
-    const fetchPatches= async (page: number, sort?: string) => {
+    const fetchPatches = async (page: number, sort?: string) => {
         const response = await fetchUserPatches(page, undefined, sort);
-  
-        setPosts(response.data.results);
-        setTotalPages(Math.ceil(response.data.count / PatchesPerPage));
-        setNextPage(response.data.next);
-        setPreviousPage(response.data.previous);
+        if (response.status === 200) {
+          setPosts(response.data.results);
+          setTotalPages(Math.ceil(response.data.count / PatchesPerPage));
+          setNextPage(response.data.next);
+          setPreviousPage(response.data.previous);
+        }
+        else if (response.status === 401) {
+          console.log("You are not authorized to view this page");
+        }
+        else if (response.status === 404) {
+          console.log("No patches found");
+        }
+        else {
+          console.error("Failed to fetch patches");
+        }
       };
 
     useEffect(() => {
-        fetchPatches(1, "-created");
-    }, []);
+        fetchPatches(currentPage, sort);
+    }, [currentPage, sort]);
 
     const changeSorting = (sort: PatchSortingOptionsType) => {
         const sorting = PatchSortingOptions[sort];
 
         setSort(sorting);
         setSortTitle(sort);
-        fetchUserPatches(currentPage, undefined, sorting);
     }
     const onPageChange = (page: number) => {
       setCurrentPage(page);
-      fetchUserPatches(page);
     }
     const handleNext = () => {
       if (nextPage) {
         setCurrentPage(currentPage + 1);
-        fetchUserPatches(currentPage + 1);
       }
     }
     const handlePrevious = () => {
       if (previousPage) {
         setCurrentPage(currentPage - 1);
-        fetchUserPatches(currentPage - 1);
       }
     }
 
     return (
-<main className="flex flex-col gap-y-8 px-8 md:px-[11.25%]">
+      <main className="flex flex-col gap-y-8 px-8 md:px-[11.25%]">
         <div id="Content" className="flex flex-row gap-x-9">
-          <div id="PatchesCol" className="flex flex-col gap-y-8 md:w-[70%]">
+          <div id="PatchesCol" className="flex flex-col gap-y-8 w-full">
             <div id="Title" className="flex flex-col lg:flex-row gap-y-2">
                 <h1 className="boldheader3 text-text">Your Patches</h1>
             </div>
