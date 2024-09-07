@@ -6,7 +6,8 @@ import { PatchContentEditor, PatchContentSelector, Loading, CustomModal } from "
 
 import api from "../utils/api";
 import { PersonFill, Callendar, Placeholder } from "../img";
-import { patchContent, User } from "../types";
+import { patchContent, User, PatchStatesType } from "../types";
+import { PatchStates } from "../constants";
 import { getUserDetails } from "../services/profileService";
 import { fetchPatch, fetchPatchContent } from "../services/patchService";
 import { Button } from "../components";
@@ -20,6 +21,7 @@ const PatchCreate: React.FC = () => {
     const [description, setDescription] = useState<string>("Enter the patch description here");
     const [version, setVersion] = useState<string>("1.0.0");
     const [content, setContent] = useState<patchContent[]>([]);
+    const [patchState, setState] = useState<PatchStatesType>("draft");
     const created = new Date();
 
     // Modal controlls
@@ -87,6 +89,7 @@ const PatchCreate: React.FC = () => {
             formData.append('content', JSON.stringify(content));
             formData.append('created', new Date().toISOString());
             formData.append('updated', new Date().toISOString());
+            formData.append('state', patchState);
 
             const response = await api.post("/patches/new/", 
                 formData,
@@ -97,7 +100,7 @@ const PatchCreate: React.FC = () => {
                     },
                 }
             );
-            if (response.status === 200) {
+            if (response.status === 201) {
                 setModalTitle("Patch sucesfully created");
                 setModalContent("Your patch has been created successfully, you can now exit this page.");
                 setModalOpen(true);
@@ -171,16 +174,25 @@ const PatchCreate: React.FC = () => {
                             <input className="semiboldheader3 md:semiboldheader2 text-clr_primary bg-background border-2 border-dashed border-text rounded-lg p-2" value={title} onChange={(e) => setTitle(e.target.value)} />
                             <input className="semiboldheader3 md:semiboldheader2 text-text opacity-70 bg-background max-w-24 border-2 border-dashed border-text rounded-lg p-2" value={version} onChange={(e) => setVersion(e.target.value)}/>
                         </div>
-                        <div className="flex flex-col md:flex-row text-text gap-x-3 gap-y-3">
-                            <div className="flex flex-row gap-x-1 items-center justify-center">
-                                <PersonFill className="w-4 h-4"/>
-                                <Link to={`/profile/${user.id}`}><p className="text-text cursor-pointer hover:opacity-70">{user.username}</p></Link>
+                        <div className="flex flex-col gap-y-4">
+                            <div className="flex flex-col md:flex-row text-text gap-x-3 gap-y-3">
+                                <div className="flex flex-row gap-x-1 items-center justify-center">
+                                    <PersonFill className="w-4 h-4"/>
+                                    <Link to={`/profile/${user.id}`}><p className="text-text cursor-pointer hover:opacity-70">{user.username}</p></Link>
+                                </div>
+                                <div className="flex flex-row gap-x-1 items-center justify-center">
+                                    <Callendar className="w-4 h-4"/>
+                                    <p>{format(created, 'dd-MM-yyyy')}</p>
+                                </div>
+                                {/* TODO: Add download stat */}
                             </div>
-                            <div className="flex flex-row gap-x-1 items-center justify-center">
-                                <Callendar className="w-4 h-4"/>
-                                <p>{format(created, 'dd-MM-yyyy')}</p>
-                            </div>
-                            {/* TODO: Add download stat */}
+                            <select className="flex h-10 bg-background text-text p-2 rounded-lg border-2 border-clr_primary" onChange={(e) => setState(e.target.value as PatchStatesType)}>
+                                        {PatchStates.map((state, index) => 
+                                        <option key={index} value={state} selected={patchState===state? true : false}>
+                                            {state}
+                                        </option>
+                                        )}
+                            </select>
                         </div>
                     </div>
                 </div>

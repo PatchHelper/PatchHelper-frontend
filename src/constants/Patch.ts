@@ -26,3 +26,5 @@ export const PatchSortingOptions = {
     "Top Rated": "-upvotes",
     "Most Downloaded": "-downloads"
   }
+
+export const PatchStates = ["published", "draft", "hidden"] as const;
