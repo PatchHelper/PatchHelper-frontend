@@ -86,9 +86,9 @@ const PatchOverview: React.FC<PatchOverviewProps> = (props: PatchOverviewProps) 
                     {props.editable && 
                         <div className="flex flex-row gap-x-2 items-center">
                             <label className="text-text">State:</label>
-                            <select className="flex h-10 bg-background text-text p-2 rounded-lg border-2 border-clr_primary" onChange={(e) => handleStateChange(e)}>
+                            <select defaultValue={props.patch.state} className="flex h-10 bg-background text-text p-2 rounded-lg border-2 border-clr_primary" onChange={(e) => handleStateChange(e)}>
                                 {PatchStates.map((state, index) => 
-                                <option key={index} value={state} selected={props.patch.state===state? true : false}>
+                                <option key={index} value={state}>
                                     {state}
                                 </option>
                                 )}

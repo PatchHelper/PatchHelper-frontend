@@ -186,9 +186,9 @@ const PatchCreate: React.FC = () => {
                                 </div>
                                 {/* TODO: Add download stat */}
                             </div>
-                            <select className="flex h-10 bg-background text-text p-2 rounded-lg border-2 border-clr_primary" onChange={(e) => setState(e.target.value as PatchStatesType)}>
+                            <select defaultValue={patchState} className="flex h-10 bg-background text-text p-2 rounded-lg border-2 border-clr_primary" onChange={(e) => setState(e.target.value as PatchStatesType)}>
                                         {PatchStates.map((state, index) => 
-                                        <option key={index} value={state} selected={patchState===state? true : false}>
+                                        <option key={index} value={state}>
                                             {state}
                                         </option>
                                         )}
