@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { format } from "date-fns";
+import { Link, useParams } from "react-router-dom";
+import { format, set } from "date-fns";
 
-import { PatchContentEditor, PatchContentSelector } from "../components";
+import { PatchContentEditor, PatchContentSelector, Loading, CustomModal } from "../components";
 
 import api from "../utils/api";
 import { PersonFill, Callendar, Placeholder } from "../img";
 import { patchContent, User } from "../types";
 import { getUserDetails } from "../services/profileService";
+import { fetchPatch, fetchPatchContent } from "../services/patchService";
 import { Button } from "../components";
 
 const PatchCreate: React.FC = () => {
+    const { uuid } = useParams<{ uuid: string }>();
     const [user, setUser] = useState<User>();
     const [title, setTitle] = useState<string>("Patch Title");
     const [thumbnail, setThumbnail] = useState<File | null>(null);
@@ -20,46 +22,123 @@ const PatchCreate: React.FC = () => {
     const [content, setContent] = useState<patchContent[]>([]);
     const created = new Date();
 
-    useEffect(() => {
-        const fetchUser = async () => {
-            const response = await getUserDetails();
+    // Modal controlls
+    const [modalOpen, setModalOpen] = useState<boolean>(false);
+    const [modalTitle, setModalTitle] = useState<string>("Patch sucesfully created");
+    const [modalContent, setModalContent] = useState<string>("Your patch has been created successfully, you can now exit this page.");
+    const [modalError, setModalError] = useState<string>("");
 
-            if (response) {
-                setUser(response.data);
-            }
+    const fetchUser = async () => {
+        const response = await getUserDetails();
+
+        if (response) {
+            setUser(response.data);
+        }
     };
+
+    const fetchPatchData = async (patch_uuid: string) => {
+        const patch_response = await fetchPatch(patch_uuid);
+
+        if (patch_response.status !== 200) {
+            console.error("Error fetching patch data");
+            return;
+        }
+        
+        setTitle(patch_response.data.title);
+        setThumbnailPreview(patch_response.data.thumbnail);
+        setVersion(patch_response.data.version);
+        setDescription(patch_response.data.description);
+        setVersion(patch_response.data.version);
+
+        const content_response = await fetchPatchContent(patch_uuid);
+        
+        if (content_response.status !== 200) {
+            console.error("Error fetching patch data");
+            return;
+        }
+
+        setContent(content_response.data);
+
+    };
+
+    useEffect(() => {
         fetchUser();
-    }, []);
+        
+        // If uuid is present, fetch patch data
+        if (uuid) {
+            // Fetch patch details
+            fetchPatchData(uuid);
+        };
+
+    }, [uuid]);
 
     if (!user) {
-        return (
-            <div>
-                <h1>Loading...</h1>
-            </div>
-        );
+        return (<Loading/>);
     };
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        if (!uuid) { // Create new patch
+            const formData = new FormData();
+            formData.append('title', title);
+            formData.append('thumbnail', thumbnail as Blob);
+            formData.append('version', version);
+            formData.append('description', description);
+            formData.append('content', JSON.stringify(content));
+            formData.append('created', new Date().toISOString());
+            formData.append('updated', new Date().toISOString());
 
-        const formData = new FormData();
-        formData.append('title', title);
-        formData.append('thumbnail', thumbnail as Blob);
-        formData.append('version', version);
-        formData.append('description', description);
-        formData.append('content', JSON.stringify(content));
-        formData.append('created', new Date().toISOString());
-        formData.append('updated', new Date().toISOString());
-
-        const response = await api.post("/patches/new/", 
-            formData,
-            {
-                headers: {
-                    'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
-                    'Content-Type': 'multipart/form-data',
-                },
+            const response = await api.post("/patches/new/", 
+                formData,
+                {
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
+                        'Content-Type': 'multipart/form-data',
+                    },
+                }
+            );
+            if (response.status === 200) {
+                setModalTitle("Patch sucesfully created");
+                setModalContent("Your patch has been created successfully, you can now exit this page.");
+                setModalOpen(true);
             }
-        );
+            else {
+                setModalTitle("Error creating patch");
+                setModalContent("There was an error creating your patch, please try again.");
+                setModalError(`(HTTP: ${response.status} | ${response.statusText})`);
+                setModalOpen(true);
+            };
+        }
+        else { // Update existing patch
+            const formData = new FormData();
+            formData.append('title', title);
+            if (thumbnail) formData.append('thumbnail', thumbnail as Blob);
+            formData.append('version', version);
+            formData.append('description', description);
+            formData.append('content', JSON.stringify(content));
+
+            const response = await api.patch(`/patches/${uuid}/update/`, 
+                formData,
+                {
+                    headers: {
+                        'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
+                        'Content-Type': 'multipart/form-data',
+                    },
+                }
+            );
+
+            if (response.status === 200) {
+                setModalTitle("Patch sucesfully updated");
+                setModalContent("Your patch has been updated successfully, you can now exit this page.");
+                setModalOpen(true);
+            }
+            else {
+                setModalTitle("Error updating patch");
+                setModalContent("There was an error creating your patch, please try again.");
+                setModalError(`(HTTP: ${response.status} | ${response.statusText})`);
+                setModalOpen(true);
+            };
+        };
     };
 
     const handleThumbnailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -72,6 +151,10 @@ const PatchCreate: React.FC = () => {
 
     return (
         <main>
+            <CustomModal title={modalTitle} show={modalOpen} onClose={() => setModalOpen(!modalOpen)}>
+                <p className="text-text">{modalContent}</p>
+                {modalError && <p className="text-text text-clr_error">{modalError}</p>}
+            </CustomModal>
             <form className="flex flex-col gap-y-8 px-8 md:px-[11.25%]" onSubmit={handleSubmit}>
                 <div id="TitleBar" className="flex flex-row gap-x-8">
                     <div className="flex flex-col gap-y-2 items-center">

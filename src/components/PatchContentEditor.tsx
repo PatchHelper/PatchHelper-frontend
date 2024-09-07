@@ -17,11 +17,6 @@ const PatchContentEditor: React.FC<PatchContentProps> = ({index, type = "textFie
     const [elementContent, setElementContent] = useState<any>(content[index][contentIndex]);
     content[index]["order"] = order;
 
-    useEffect(() => {
-        console.log('Environment:', process.env.NODE_ENV);
-        console.log('API Key:', process.env.REACT_APP_TINYMCE_API_KEY);
-    }, [elementContent]);
-
     const handleEditorChange = (elementContent: string) => {
         if (!(type === "textField")) { return }; // Handle only text fields
 

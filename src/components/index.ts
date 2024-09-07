@@ -26,6 +26,9 @@ import ShareModal from "./modals/Share";
 import LoginModal from "./modals/Login";
 import CustomModal from "./modals/CustomModal";
 
+// States
+import Loading from "./states/Loading";
+
 export { 
     SimpleNavbar, 
     Navbar,
@@ -48,5 +51,6 @@ export {
     ShareModal,
     LoginModal,
     CustomModal,
-    Login
+    Login,
+    Loading
 };

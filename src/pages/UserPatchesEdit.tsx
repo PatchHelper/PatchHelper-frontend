@@ -1,6 +1,6 @@
 import React, { useEffect, useState} from "react";
 
-import { PageController, PatchOverview } from "../components";
+import { PageController, PatchOverview, CustomModal, Login } from "../components";
 
 import { fetchUserPatches } from "../services/patchService";
 import { PatchSortingOptionsType, Patch } from "../types";
@@ -10,6 +10,7 @@ const UserPatchesEdit: React.FC = () => {
     const [posts, setPosts] = useState<Patch[]>([]);
     const [sort, setSort] = useState<string>("-created");
     const [sortTitle, setSortTitle] = useState<PatchSortingOptionsType>("New");
+    const [showLoginModal, setShowLoginModal] = useState<boolean>(false);
 
     // Pagination
     const [currentPage, setCurrentPage] = useState<number>(1);
@@ -27,6 +28,9 @@ const UserPatchesEdit: React.FC = () => {
         }
         else if (response.status === 401) {
           console.log("You are not authorized to view this page");
+        }
+        else if (response.status === 403) {
+          setShowLoginModal(true);
         }
         else if (response.status === 404) {
           console.log("No patches found");
@@ -62,6 +66,9 @@ const UserPatchesEdit: React.FC = () => {
 
     return (
       <main className="flex flex-col gap-y-8 px-8 md:px-[11.25%]">
+        <CustomModal show={showLoginModal} onClose={() => setShowLoginModal(!showLoginModal)} title="Login">
+          <Login />
+        </CustomModal>
         <div id="Content" className="flex flex-row gap-x-9">
           <div id="PatchesCol" className="flex flex-col gap-y-8 w-full">
             <div id="Title" className="flex flex-col lg:flex-row gap-y-2">

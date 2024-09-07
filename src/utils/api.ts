@@ -4,6 +4,9 @@ import { isTokenExpired } from './auth';
 
 const api = axios.create({
     baseURL: 'http://localhost:8000/api',
+    validateStatus: (status) => {
+        return true;
+    }
 });
 
 api.interceptors.request.use(async (config) => {

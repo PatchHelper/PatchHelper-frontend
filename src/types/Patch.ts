@@ -19,6 +19,7 @@ export interface Patch {
     title: string;
     thumbnail: string;
     description: string;
+    version: string;
     content: patchContent[];
     created: string;
     updated: string;

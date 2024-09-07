@@ -45,6 +45,7 @@ const AnimatedTransition: React.FC = () => {
                 <Route path="/" Component={LandingPage}/>
                 <Route path="/patches" Component={MainApp}/>
                 <Route path="/patches/new" Component={PatchCreate}/>
+                <Route path="/patches/:uuid/edit" Component={PatchCreate}/>
                 <Route path="/patches/:uuid" Component={PatchDetail}/>
                 <Route path="/files" Component={Patches}/>
 

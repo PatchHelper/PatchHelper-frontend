@@ -44,7 +44,7 @@ const PatchOverview: React.FC<PatchOverviewProps> = (props: PatchOverviewProps) 
                         <Link to={`/patches/${props.patch.uuid}`}className={`semiboldheader2 text-text truncate ${props.editable? `max-w-[45%]` : `max-w-[100%]`}`}>{props.patch.title}</Link>
                         <div className={`flex flex-row ${props.editable? "visible" : "hidden"} gap-x-2`}>
                             {/* TODO: Add functionality */}
-                            { props.editable && <Button text="Edit" variant="accent" fill="outline" className="max-h-10 max-w-15"><Edit className="w-4 h-4"/></Button> }
+                            { props.editable && <Button text="Edit" variant="accent" fill="outline" className="max-h-10 max-w-15" link={`/patches/${props.patch.uuid}/edit`}><Edit className="w-4 h-4"/></Button> }
                             { props.editable && <Button text="Delete" variant="danger" fill="solid" className="max-h-10 max-w-15" onClick={() => setDeleteModalVisible(!deleteModalVisible)}><Trash className="w-4 h-4"/></Button>  }
                         </div>
                     </div>

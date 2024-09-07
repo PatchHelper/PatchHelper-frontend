@@ -93,7 +93,7 @@ const PatchDetail: React.FC = () => {
                 <div id="PatchInfo" className="flex flex-col gap-y-3">
                     <div className="flex flex-wrap gap-x-2 gap-y-2">
                         <h2 className="semiboldheader3 md:semiboldheader2 text-text">{patch.title}</h2>
-                        <h2 className="semiboldheader3 md:semiboldheader2 text-text opacity-70">0.0.0 </h2> {/* TODO: Add version to patch model */}
+                        <h2 className="semiboldheader3 md:semiboldheader2 text-text opacity-70">{patch.version}</h2> {/* TODO: Add version to patch model */}
                     </div>
                     <div className="flex flex-col md:flex-row text-text gap-x-3 gap-y-3">
                         <div className="flex flex-row gap-x-1 items-center justify-center">
